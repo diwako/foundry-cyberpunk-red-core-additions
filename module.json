@@ -1,0 +1,37 @@
+{
+  "title": "Diwako's Cyberpunk Red - Core Additions",
+  "description": "Adds small features to the system as a stop gap solution until similar and better functionality is added to the core system itself. Optionally adds support for hit and miss animations with JB2A Patreon animations and Sequencer. Adds deeper support for Item Piles. Shows if a ranged attack hits or misses in chat.",
+  "version": "0.1.0",
+  "authors": [{ "name": "diwako" }],
+  "socket": true,
+  "id": "diwako-cpred-additions",
+  "scripts": ["scripts/main.js", "scripts/config.js"],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    },
+    {
+      "lang": "fr",
+      "name": "Français",
+      "path": "languages/fr.json"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "cyberpunk-red-core",
+        "type": "system",
+        "compatibility": {
+          "minimum": "0.86.1"
+        }
+      }
+    ],
+    "requires": []
+  },
+  "compatibility": {
+    "minimum": "10",
+    "verified": "10"
+  }
+}
