@@ -1,13 +1,17 @@
-<div class="directory flexcol">
-  <header class="directory-header flexcol">
-    {{ localize "diwako-cpred-additions.settings.sound-select.hint" }}
-  </header>
-</div>
-<form
-  autocomplete="off"
-  onsubmit="event.preventDefault()"
-  style="height: 100%; overflow: hidden"
->
+<form autocomplete="off" onsubmit="event.preventDefault()">
+  <div class="directory flexcol">
+    <header class="directory-header flexcol">
+      <b>{{ localize "diwako-cpred-additions.settings.sound-select.hint" }}</b>
+    </header>
+  </div>
+  <table>
+    {{#each userSounds}}
+    <tr>
+      <th><input name="option_{{.}}" type="text" value="{{.}}" readonly /></th>
+      <th><i class="far fa-trash"></i></th>
+    </tr>
+    {{/each}}
+  </table>
   <button type="button" on:click|once="{{requestSubmit}}">
     <i class="far fa-save"></i>
     {{ localize "diwako-cpred-additions.settings.submit" }}

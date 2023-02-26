@@ -1,4 +1,8 @@
 export class SoundMenu extends FormApplication {
+  constructor(object, options) {
+    super(object, options);
+  }
+
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       id: "diwako-cpred-additions-sounds-menu",
@@ -8,7 +12,7 @@ export class SoundMenu extends FormApplication {
       template: `modules/diwako-cpred-additions/templates/soundmenu.html`,
       classes: ["sheet"],
       width: 500,
-      height: 500,
+    //   height: 500,
       closeOnSubmit: true,
       submitOnClose: false,
       resizable: true,
@@ -16,7 +20,12 @@ export class SoundMenu extends FormApplication {
   }
 
   async getData() {
-    // const data = super.getData();
-    return game.settings.get("diwako-cpred-additions", "configure-sounds");
+    const data = super.getData().object;
+    const moduleData = game.settings.get(
+      "diwako-cpred-additions",
+      "configure-sounds"
+    );
+    data.userSounds = moduleData;
+    return data;
   }
 }
