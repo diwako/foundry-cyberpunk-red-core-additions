@@ -1,0 +1,30 @@
+{
+  "diwako-cpred-additions": {
+    "settings": {
+      "hit-animations": {
+        "name": "Afficher les animations de tir",
+        "hint": "Nécéssite Sequencer and JB2A animations! Active ou désactive les animations de tirs. Désactivez si vous n'avez pas JB2A patreon module ou Sequencer activés!"
+      },
+      "hit-sounds": {
+        "name": "Jouer un son au Tir",
+        "hint": "Nécéssite Sequencer! Jouer un son quand une cible est touchée par un tir"
+      },
+      "sound-select": {
+        "name": "Selectionner un son de tir",
+        "hint": "Selectionnez le son que vous voulez entendre quand un tir touche sa cible"
+      },
+      "submit": "Soumettre",
+      "add-sound": "Ajouter un Son"
+    },
+    "message": {
+      "missed": {
+        "normal": "<b>{attacker} <span class=\"fg-red\">rate</span> {target}</b> de {dv-diff+1} (DV: {dv})!",
+        "evade": "<b>{attacker} <span class=\"fg-red\">rate</span> {target}</b> de {dv-diff+1} selon le SD à distance ({dv})! Jetez les dégâts SI une esquive a été déclarée ET que votre jet est supérieur à celui de l'esquive!"
+      },
+      "hit": {
+        "normal": "<b>{attacker} <span class=\"fg-green\">touche</span> {target}</b> (DV: {dv}, {dv-diff} au-dessus)! Jetez les dégâts!",
+        "evade": "<b>{attacker} <span class=\"fg-green\">Dépasse le SD à distance</span> </b>({dv}, {dv-diff} au-dessus)<b> pour toucher {target}</b> de {dv-diff-1}! Jetez les dégâts SI aucune esquive n'a été déclarée OU que votre jet dépasse celui de l'esquive"
+      }
+    }
+  }
+}
