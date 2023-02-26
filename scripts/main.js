@@ -8,7 +8,6 @@ Hooks.once("init", function () {
 // Check if an attack hits or not
 // Huge thanks to Zhell from the foundry discord for all the help
 Hooks.on("createChatMessage", async function (message) {
-  // if (!game.user.isGM) return;
   if (game.userId != message._source.user) return;
   const DIV = document.createElement("DIV");
   DIV.innerHTML = message.content;
@@ -169,58 +168,48 @@ Hooks.on("createChatMessage", async function (message) {
       );
     }
 
-    if (
-      window.Sequence &&
-      game.settings.get("diwako-cpred-additions", "hit-animations")
-    ) {
-      let angle =
-        (360 +
-          Math.atan2(target.y - token.y, target.x - token.x) *
-            (180 / Math.PI)) %
-        360;
-      // hit marker sound effect
+    if (window.Sequence) {
       const sequence = new Sequence();
+      // sound effect
       if (game.settings.get("diwako-cpred-additions", "hit-sounds")) {
-        let sounds = [
-          "bf1.ogg",
-          "cod.ogg",
-          "quake.ogg",
-          "hl1.ogg",
-          "windows.ogg",
-          "crash.ogg",
-          "roblox.ogg",
-          "boardgameonline.ogg",
-          "disco.ogg",
-          "titanfall2.mp3",
-        ];
-        sequence
-          .sound()
-          .delay(1000)
-          .file(
-            `worlds/diw_cpred/sounds/hitsounds/${
-              sounds[Math.floor(Math.random() * sounds.length)]
-            }`
-          )
-          .volume(0.35)
-          .locally(message.whisper.length != 0);
+        const sounds = game.settings.get(
+          "diwako-cpred-additions",
+          "configured-sounds"
+        );
+        if (sounds.length > 0) {
+          const soundFile = sounds[Math.floor(Math.random() * sounds.length)];
+          sequence
+            .sound()
+            .delay(1000)
+            .file(soundFile)
+            .volume(0.35)
+            .locally(message.whisper.length != 0);
+        }
       }
       // blood effect
-      sequence
-        .effect()
-        .delay(250)
-        .file(
-          "modules/jb2a_patreon/Library/Generic/Weapon_Attacks/Melee/DmgBludgeoning_01_Regular_Yellow_2Handed_800x600.webm"
-        )
-        .atLocation(target, {
-          offset: {
-            x: -Math.cos((angle * Math.PI) / 180),
-            y: -Math.sin((angle * Math.PI) / 180),
-          },
-          gridUnits: true,
-        })
-        .rotate(angle * -1)
-        .locally(message.whisper.length != 0)
-        .play();
+      if (game.settings.get("diwako-cpred-additions", "hit-animations")) {
+        let angle =
+          (360 +
+            Math.atan2(target.y - token.y, target.x - token.x) *
+              (180 / Math.PI)) %
+          360;
+        sequence
+          .effect()
+          .delay(250)
+          .file(
+            "modules/jb2a_patreon/Library/Generic/Weapon_Attacks/Melee/DmgBludgeoning_01_Regular_Yellow_2Handed_800x600.webm"
+          )
+          .atLocation(target, {
+            offset: {
+              x: -Math.cos((angle * Math.PI) / 180),
+              y: -Math.sin((angle * Math.PI) / 180),
+            },
+            gridUnits: true,
+          })
+          .rotate(angle * -1)
+          .locally(message.whisper.length != 0);
+      }
+      sequence.play();
     }
   }
 

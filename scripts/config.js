@@ -1,7 +1,6 @@
 import { SoundMenu } from "./soundMenu.js";
 
 export class Config {
-  // Hooks.once("init", function () {
   static registerSettings() {
     console.log("diwako-cpred-additions settings start");
     game.settings.register("diwako-cpred-additions", "hit-animations", {
@@ -16,6 +15,7 @@ export class Config {
       type: Boolean,
       default: window.Sequence != null,
     });
+
     game.settings.register("diwako-cpred-additions", "hit-sounds", {
       name: game.i18n.localize(
         "diwako-cpred-additions.settings.hit-sounds.name"
@@ -34,7 +34,7 @@ export class Config {
       "configure-sounds-menu",
       {
         name: "diwako-cpred-additions.settings.sound-select.name",
-        label: "diwako-cpred-additions.settings.sound-select.label",
+        label: "",
         hint: "diwako-cpred-additions.settings.sound-select.hint",
         icon: "fas fa-cog",
         type: SoundMenu,
@@ -42,7 +42,7 @@ export class Config {
       }
     );
 
-    game.settings.register("diwako-cpred-additions", "configure-sounds", {
+    game.settings.register("diwako-cpred-additions", "configured-sounds", {
       scope: "world",
       config: false,
       type: Array,
@@ -51,5 +51,4 @@ export class Config {
 
     console.log("diwako-cpred-additions settings end");
   }
-  // });
 }

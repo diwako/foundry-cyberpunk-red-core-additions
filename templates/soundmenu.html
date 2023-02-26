@@ -7,12 +7,26 @@
   <table>
     {{#each userSounds}}
     <tr>
-      <th><input name="option_{{.}}" type="text" value="{{.}}" readonly /></th>
-      <th><i class="far fa-trash"></i></th>
+      <th>
+        <input type="text" class="diw-audiopath" value="{{.}}" readonly />
+      </th>
+      <th>
+        <a>
+          <i class="fa-solid fa-trash"></i>
+        </a>
+      </th>
     </tr>
     {{/each}}
+    <tr class="add-row">
+      <th>
+        <a>
+          <i class="fa-solid fa-add" style="display: contents"></i> {{localize
+          "diwako-cpred-additions.settings.add-sound"}}
+        </a>
+      </th>
+    </tr>
   </table>
-  <button type="button" on:click|once="{{requestSubmit}}">
+  <button type="button" id="save-hit-sounds">
     <i class="far fa-save"></i>
     {{ localize "diwako-cpred-additions.settings.submit" }}
   </button>

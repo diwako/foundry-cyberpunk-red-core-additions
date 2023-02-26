@@ -11,10 +11,10 @@
       },
       "sound-select": {
         "name": "Select hit sounds",
-        "hint": "Select the sounds you want to be played when a token lands a hit on another",
-        "label": "Manage Hit Sounds"
+        "hint": "Select the sounds you want to be played when a token lands a hit on another"
       },
-      "submit": "Submit"
+      "submit": "Submit",
+      "add-sound": "Add sound"
     },
     "message": {
       "missed": {
