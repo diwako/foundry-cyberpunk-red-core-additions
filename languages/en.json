@@ -1,17 +1,30 @@
 {
-  "diwako-cpred-additions.settings.hit-animations.name": "Show hit or miss animations",
-  "diwako-cpred-additions.settings.hit-animations.hint": "Enable or disable hit or miss animations. Disable if you do not have the JB2A patron module or Sequencer loaded!",
-  "diwako-cpred-additions.settings.hit-sounds.name": "Play sounds on hit",
-  "diwako-cpred-additions.settings.hit-sounds.hint": "THIS IS ONLY AN OPTION AS I USE CUSTOM SOUNDS! I cannot supply these sounds, so I am adding an option to make maintenance of this script easier! This option REQUIRES the hit animations",
-
-  "diwako-cpred-additions.message": {
-    "missed": {
-      "normal": "<b>{attacker} <span class=\"fg-red\">missed</span> {target}</b> by {dv-diff+1} (DV: {dv})!",
-      "evade": "<b>{attacker} <span class=\"fg-red\">missed</span> {target}</b> by {dv-diff+1} according to the ranged DV ({dv})! Roll damage IF they have declared that they are dodging AND your roll has beat their evasion roll!"
+  "diwako-cpred-additions": {
+    "settings": {
+      "hit-animations": {
+        "name": "Show hit or miss animations",
+        "hint": "Requires Sequencer and JB2A animations! Enable or disable hit or miss animations. Disable if you do not have the JB2A patreon module or Sequencer loaded!"
+      },
+      "hit-sounds": {
+        "name": "Play sounds on hit",
+        "hint": "Requires Sequencer! Play sounds when target is hit by a ranged attack"
+      },
+      "sound-select": {
+        "name": "Select hit sounds",
+        "hint": "Select the sounds you want to be played when a token lands a hit on another",
+        "label": "Manage Hit Sounds"
+      },
+      "submit": "Submit"
     },
-    "hit": {
-      "normal": "<b>{attacker} <span class=\"fg-green\">hits</span> {target}</b> (DV: {dv}, {dv-diff} over)! Roll Damage!",
-      "evade": "<b>{attacker} <span class=\"fg-green\">beats the ranged DV</span> </b>({dv}, {dv-diff} over)<b> to hit {target}</b> by {dv-diff-1}! Roll damage IF they have NOT declared that they are dodging OR your roll has beat their evasion roll"
+    "message": {
+      "missed": {
+        "normal": "<b>{attacker} <span class=\"fg-red\">missed</span> {target}</b> by {dv-diff+1} (DV: {dv})!",
+        "evade": "<b>{attacker} <span class=\"fg-red\">missed</span> {target}</b> by {dv-diff+1} according to the ranged DV ({dv})! Roll damage IF they have declared that they are dodging AND your roll has beat their evasion roll!"
+      },
+      "hit": {
+        "normal": "<b>{attacker} <span class=\"fg-green\">hits</span> {target}</b> (DV: {dv}, {dv-diff} over)! Roll Damage!",
+        "evade": "<b>{attacker} <span class=\"fg-green\">beats the ranged DV</span> </b>({dv}, {dv-diff} over)<b> to hit {target}</b> by {dv-diff-1}! Roll damage IF they have NOT declared that they are dodging OR your roll has beat their evasion roll"
+      }
     }
   }
 }

@@ -1,0 +1,15 @@
+<div class="directory flexcol">
+  <header class="directory-header flexcol">
+    {{ localize "diwako-cpred-additions.settings.sound-select.hint" }}
+  </header>
+</div>
+<form
+  autocomplete="off"
+  onsubmit="event.preventDefault()"
+  style="height: 100%; overflow: hidden"
+>
+  <button type="button" on:click|once="{{requestSubmit}}">
+    <i class="far fa-save"></i>
+    {{ localize "diwako-cpred-additions.settings.submit" }}
+  </button>
+</form>

@@ -1,4 +1,9 @@
+import { Config } from "./config.js";
+
 console.log("diwako-cpred-additions start");
+Hooks.once("init", function () {
+  Config.registerSettings();
+});
 
 // Check if an attack hits or not
 // Huge thanks to Zhell from the foundry discord for all the help
@@ -55,7 +60,9 @@ Hooks.on("createChatMessage", async function (message) {
   );
   let dvTable = item.system?.dvTable;
   if (!dvTable || dvTable === "") {
-    console.log(`diwako-cpred-additions ===== Weapon has no DV table assigned!`);
+    console.log(
+      `diwako-cpred-additions ===== Weapon has no DV table assigned!`
+    );
     return;
   }
 
@@ -72,7 +79,9 @@ Hooks.on("createChatMessage", async function (message) {
   const pack = game.packs.get("cyberpunk-red-core.dvTables");
   const tableId = pack.index.getName(dvTable)?._id;
   if (!tableId) {
-    console.log(`diwako-cpred-additions ===== No compendium table found => ${dvTable}`);
+    console.log(
+      `diwako-cpred-additions ===== No compendium table found => ${dvTable}`
+    );
     return;
   }
   const table = await pack.getDocument(tableId);
@@ -86,9 +95,9 @@ Hooks.on("createChatMessage", async function (message) {
   const dv = parseInt(draw[0].text);
 
   const messageReplaceMap = {
-    "attacker": token.name,
-    "target": target.document.name,
-    "dv": dv,
+    attacker: token.name,
+    target: target.document.name,
+    dv: dv,
     "dv-diff": attackRoll - dv,
     "dv-diff+1": dv - attackRoll + 1,
     "dv-diff-1": attackRoll - 1 - dv,
@@ -104,14 +113,20 @@ Hooks.on("createChatMessage", async function (message) {
         dv - attackRoll + 1
       } according to the ranged DV (${dv})! Roll damage IF they have declared that they are dodging AND your roll has beat their evasion roll!`;
 
-    //   chatMessage = game.i18n.localize("diwako-cpred-additions.message.missed.evade");
-      chatMessage = game.i18n.format("diwako-cpred-additions.message.missed.evade", messageReplaceMap);
+      //   chatMessage = game.i18n.localize("diwako-cpred-additions.message.missed.evade");
+      chatMessage = game.i18n.format(
+        "diwako-cpred-additions.message.missed.evade",
+        messageReplaceMap
+      );
     } else {
       chatMessage = `<b>${token.name} <span class="fg-red">missed</span> ${
         target.document.name
       }</b> by ${dv - attackRoll + 1} (DV: ${dv})!`;
-    //   chatMessage = game.i18n.localize("diwako-cpred-additions.message.missed.normal");
-      chatMessage = game.i18n.format("diwako-cpred-additions.message.missed.normal", messageReplaceMap);
+      //   chatMessage = game.i18n.localize("diwako-cpred-additions.message.missed.normal");
+      chatMessage = game.i18n.format(
+        "diwako-cpred-additions.message.missed.normal",
+        messageReplaceMap
+      );
     }
     if (
       window.Sequence &&
@@ -139,13 +154,19 @@ Hooks.on("createChatMessage", async function (message) {
       } over)<b> to hit ${target.document.name}</b> by ${
         attackRoll - 1 - dv
       }! Roll damage IF they have NOT declared that they are dodging OR your roll has beat their evasion roll!`;
-    //   chatMessage = game.i18n.localize("diwako-cpred-additions.message.hit.evade");
-      chatMessage = game.i18n.format("diwako-cpred-additions.message.hit.evade", messageReplaceMap);
+      //   chatMessage = game.i18n.localize("diwako-cpred-additions.message.hit.evade");
+      chatMessage = game.i18n.format(
+        "diwako-cpred-additions.message.hit.evade",
+        messageReplaceMap
+      );
     } else {
       chatMessage = `<b>${token.name} <span class="fg-green">hits</span> ${
         target.document.name
       }</b> (DV: ${dv}, ${attackRoll - dv} over)! Roll damage!`;
-      chatMessage = game.i18n.format("diwako-cpred-additions.message.hit.normal", messageReplaceMap);
+      chatMessage = game.i18n.format(
+        "diwako-cpred-additions.message.hit.normal",
+        messageReplaceMap
+      );
     }
 
     if (
