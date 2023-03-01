@@ -2,6 +2,10 @@
 
 A small module to add some more features to the Cyberpunk Red - Core system until these features are either added to the system itself or other wise.
 
+## Requirements
+
+[LibWrapper](https://foundryvtt.com/packages/lib-wrapper)
+
 ## Features
 
 ### "Does it hit?"
@@ -28,6 +32,14 @@ Displays the "Miss" animation most people know from XCOM2 and onwards. On hit it
 
 Do note this feature is not for gun fire effects, this is covered by the Automated Animations module and custom configuration files!
 
+### DV Display
+
+Have your character's token selected and hover over another token to show the DVs you'd need to beat for all your currently equipped ranged weapons. Supports upgrade items like underslung grenade launcher, cyber weapons like pop up launchers. By default shows only during combat encounters, but can be displayed any time with a setting.
+
+Can either show weapon names, or weapon types. Text can be displayed left or right of the hovered token. All configurable via game settings.
+
+![DV Display example](images/dv-display.png)
+
 ### Item Piles Module features
 
 [Items Piles](https://github.com/fantasycalendar/FoundryVTT-ItemPiles/) is great, I fully recommend that module, sadly it can break character sheets if you drop, store, or sell an upgraded item using an Item Piles functionality.
@@ -40,4 +52,6 @@ If you do not run Item Piles, don't worry this module will do nothing then.
 
 The CPRED - Core system does not provide speaker data on chat messages for players. The module will try to get the attacker token through various ways, but if the token you are attacking with has a different name than your character AND prototype token, this will not work. For the GM it will work just fine, as required data is being sent.
 
-Only DV tables from the system's compendium is used. Custom ones are currently not supported.
+Only DV tables from the system's compendium are used. Custom ones are currently not supported.
+
+DV Display and "Does it hit" can only work if a weapon has a DV table configured.
