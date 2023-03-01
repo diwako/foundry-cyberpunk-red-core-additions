@@ -1,11 +1,10 @@
 import { SoundMenu } from "./soundMenu.js";
-
-const MODULE = "diwako-cpred-additions";
+import { Constants } from "./constants.js";
 
 export class Config {
   static registerSettings() {
     console.log("diwako-cpred-additions settings start");
-    game.settings.register(MODULE, "hit-animations", {
+    game.settings.register(Constants.MODULE_NAME, "hit-animations", {
       name: game.i18n.localize(
         "diwako-cpred-additions.settings.hit-animations.name"
       ),
@@ -18,7 +17,7 @@ export class Config {
       default: window.Sequence != null,
     });
 
-    game.settings.register(MODULE, "hit-sounds", {
+    game.settings.register(Constants.MODULE_NAME, "hit-sounds", {
       name: game.i18n.localize(
         "diwako-cpred-additions.settings.hit-sounds.name"
       ),
@@ -31,7 +30,7 @@ export class Config {
       default: false,
     });
 
-    game.settings.registerMenu(MODULE, "configure-sounds-menu", {
+    game.settings.registerMenu(Constants.MODULE_NAME, "configure-sounds-menu", {
       name: "diwako-cpred-additions.settings.sound-select.name",
       label: "",
       hint: "diwako-cpred-additions.settings.sound-select.hint",
@@ -40,14 +39,14 @@ export class Config {
       restricted: false,
     });
 
-    game.settings.register(MODULE, "configured-sounds", {
+    game.settings.register(Constants.MODULE_NAME, "configured-sounds", {
       scope: "world",
       config: false,
       type: Array,
       default: [],
     });
 
-    game.settings.register(MODULE, "showDVDisplay", {
+    game.settings.register(Constants.MODULE_NAME, "showDVDisplay", {
       name: game.i18n.localize(
         "diwako-cpred-additions.settings.dv-display-show.name"
       ),
@@ -60,7 +59,7 @@ export class Config {
       default: true,
     });
 
-    game.settings.register(MODULE, "dvDisplayOnlyInCombat", {
+    game.settings.register(Constants.MODULE_NAME, "dvDisplayOnlyInCombat", {
       name: game.i18n.localize(
         "diwako-cpred-additions.settings.dv-display-combat-only.name"
       ),
@@ -73,7 +72,7 @@ export class Config {
       default: true,
     });
 
-    game.settings.register(MODULE, "dvDisplayPosition", {
+    game.settings.register(Constants.MODULE_NAME, "dvDisplayPosition", {
       name: game.i18n.localize(
         "diwako-cpred-additions.settings.dv-display-position.name"
       ),
@@ -94,18 +93,22 @@ export class Config {
       default: "right",
     });
 
-    game.settings.register(MODULE, "showWeaponNamesInDvDisplay", {
-      name: game.i18n.localize(
-        "diwako-cpred-additions.settings.dv-display-show-weapon-name.name"
-      ),
-      hint: game.i18n.localize(
-        "diwako-cpred-additions.settings.dv-display-show-weapon-name.hint"
-      ),
-      scope: "client",
-      config: true,
-      type: Boolean,
-      default: true,
-    });
+    game.settings.register(
+      Constants.MODULE_NAME,
+      "showWeaponNamesInDvDisplay",
+      {
+        name: game.i18n.localize(
+          "diwako-cpred-additions.settings.dv-display-show-weapon-name.name"
+        ),
+        hint: game.i18n.localize(
+          "diwako-cpred-additions.settings.dv-display-show-weapon-name.hint"
+        ),
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: true,
+      }
+    );
 
     console.log("diwako-cpred-additions settings end");
   }

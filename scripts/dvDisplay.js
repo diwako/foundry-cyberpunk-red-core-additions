@@ -1,35 +1,13 @@
 import { Utils } from "./utils.js";
+import { Constants } from "./constants.js";
 
-const MODULE = "diwako-cpred-additions";
-
-const weaponTypeList = {
-  assaultRifle: "CPR.global.weaponType.assaultRifle",
-  bow: "CPR.global.weaponType.bowsAndCrossbows",
-  grenadeLauncher: "CPR.global.weaponType.grenadeLauncher",
-  heavyMelee: "CPR.global.weaponType.heavyMeleeWeapon",
-  heavyPistol: "CPR.global.weaponType.heavyPistol",
-  heavySmg: "CPR.global.weaponType.heavySmg",
-  lightMelee: "CPR.global.weaponType.lightMeleeWeapon",
-  martialArts: "CPR.global.weaponType.martialArts",
-  medMelee: "CPR.global.weaponType.mediumMeleeWeapon",
-  medPistol: "CPR.global.weaponType.mediumPistol",
-  rocketLauncher: "CPR.global.weaponType.rocketLauncher",
-  shotgun: "CPR.global.weaponType.shotgun",
-  smg: "CPR.global.weaponType.smg",
-  sniperRifle: "CPR.global.weaponType.sniperRifle",
-  thrownWeapon: "CPR.global.weaponType.thrownWeapon",
-  unarmed: "CPR.global.weaponType.unarmed",
-  vHeavyMelee: "CPR.global.weaponType.veryHeavyMeleeWeapon",
-  vHeavyPistol: "CPR.global.weaponType.veryHeavyPistol",
-};
-
-const shownWeaponTypes = [];
+const SHOWN_WEAPONS = [];
 
 export class DvDisplay {
   static async show() {
     if (
-      !game.settings.get(MODULE, "showDVDisplay") ||
-      (game.settings.get(MODULE, "dvDisplayOnlyInCombat") &&
+      !game.settings.get(Constants.MODULE_NAME, "showDVDisplay") ||
+      (game.settings.get(Constants.MODULE_NAME, "dvDisplayOnlyInCombat") &&
         !game.combat?.started)
     )
       return;
@@ -43,7 +21,7 @@ export class DvDisplay {
     let displayText = "";
     let num = 0;
     const showWeaponNames = game.settings.get(
-      MODULE,
+      Constants.MODULE_NAME,
       "showWeaponNamesInDvDisplay"
     );
 
@@ -91,7 +69,10 @@ export class DvDisplay {
     }
 
     if (num === 0) return;
-    let position = game.settings.get(MODULE, "dvDisplayPosition");
+    let position = game.settings.get(
+      Constants.MODULE_NAME,
+      "dvDisplayPosition"
+    );
 
     this.dvDisplay?.removeChildren()?.forEach((display) => display.destroy());
     const style = CONFIG.canvasTextStyle.clone();
@@ -106,7 +87,7 @@ export class DvDisplay {
     else this.dvDisplay.position.set(-15, 0);
 
     // empty constant
-    shownWeaponTypes.splice(0, shownWeaponTypes.length);
+    SHOWN_WEAPONS.splice(0, SHOWN_WEAPONS.length);
   }
 
   static clear() {
@@ -124,16 +105,18 @@ function generateDisplayText(item, showWeaponNames, dv) {
   let name = item.name;
 
   if (showWeaponNames === false) {
-    if (shownWeaponTypes.includes(item.system.weaponType)) {
+    if (SHOWN_WEAPONS.includes(item.system.weaponType)) {
       return "";
     }
-    shownWeaponTypes.push(item.system.weaponType);
-    name = game.i18n.localize(weaponTypeList[item.system.weaponType]);
+    SHOWN_WEAPONS.push(item.system.weaponType);
+    name = game.i18n.localize(
+      Constants.WEAPON_TYPE_LIST[item.system.weaponType]
+    );
   } else {
-    if (shownWeaponTypes.includes(item.name)) {
+    if (SHOWN_WEAPONS.includes(item.name)) {
       return "";
     }
-    shownWeaponTypes.push(item.name);
+    SHOWN_WEAPONS.push(item.name);
   }
   return game.i18n.format("diwako-cpred-additions.dv-display.dv-text", {
     "weapon-name": name,

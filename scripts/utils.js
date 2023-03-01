@@ -1,6 +1,5 @@
+const DV_CACHE = new Map();
 export class Utils {
-  static dvCache = new Map();
-
   static getDistance(token, target) {
     if (token.document) token = token.document;
     const a = canvas.grid.measureDistance(token, target, {
@@ -11,7 +10,7 @@ export class Utils {
   }
 
   static async getDV(dvTable, dist) {
-    let cachedData = this.dvCache.get(dvTable);
+    let cachedData = DV_CACHE.get(dvTable);
     if (!cachedData) {
       const pack = game.packs.get("cyberpunk-red-core.dvTables");
       const tableId = pack.index.getName(dvTable)?._id;
@@ -24,7 +23,7 @@ export class Utils {
       const table = await pack.getDocument(tableId);
       console.log(`diwako-cpred-additions ===== Caching table ${dvTable}`);
       cachedData = { table, dvs: new Map() };
-      this.dvCache.set(dvTable, cachedData);
+      DV_CACHE.set(dvTable, cachedData);
     }
     let dv = cachedData.dvs.get(dist);
     if (!dv) {

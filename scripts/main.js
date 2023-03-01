@@ -1,13 +1,12 @@
 import { Config } from "./config.js";
 import { DvDisplay } from "./dvDisplay.js";
 import { Utils } from "./utils.js";
-
-const MODULE = "diwako-cpred-additions";
+import { Constants } from "./constants.js";
 
 console.log("diwako-cpred-additions start");
 Hooks.once("init", function () {
   libWrapper.register(
-    MODULE,
+    Constants.MODULE_NAME,
     "Token.prototype.draw",
     DvDisplay.registerWrapper,
     "WRAPPER"
@@ -26,7 +25,7 @@ Hooks.on("hoverToken", (token, hovered) => {
   }
 });
 
-Hooks.on("controlToken", (token, controlled) => {
+Hooks.on("controlToken", (token, _) => {
   // prevent display of DV info when selecting current hovered token
   canvas.tokens.get(token.id)?.clearDVDisplay();
 });
@@ -124,7 +123,10 @@ Hooks.on("createChatMessage", async function (message) {
         messageReplaceMap
       );
     }
-    if (window.Sequence && game.settings.get(MODULE, "hit-animations")) {
+    if (
+      window.Sequence &&
+      game.settings.get(Constants.MODULE_NAME, "hit-animations")
+    ) {
       new Sequence()
         .effect()
         .delay(1000)
@@ -157,8 +159,11 @@ Hooks.on("createChatMessage", async function (message) {
     if (window.Sequence) {
       const sequence = new Sequence();
       // sound effect
-      if (game.settings.get(MODULE, "hit-sounds")) {
-        const sounds = game.settings.get(MODULE, "configured-sounds");
+      if (game.settings.get(Constants.MODULE_NAME, "hit-sounds")) {
+        const sounds = game.settings.get(
+          Constants.MODULE_NAME,
+          "configured-sounds"
+        );
         if (sounds.length > 0) {
           const soundFile = sounds[Math.floor(Math.random() * sounds.length)];
           sequence
@@ -170,7 +175,7 @@ Hooks.on("createChatMessage", async function (message) {
         }
       }
       // blood effect
-      if (game.settings.get(MODULE, "hit-animations")) {
+      if (game.settings.get(Constants.MODULE_NAME, "hit-animations")) {
         let angle =
           (360 +
             Math.atan2(target.y - token.y, target.x - token.x) *
