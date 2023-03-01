@@ -27,6 +27,7 @@ Hooks.on("hoverToken", (token, hovered) => {
 });
 
 Hooks.on("controlToken", (token, controlled) => {
+  // prevent display of DV info when selecting current hovered token
   canvas.tokens.get(token.id)?.clearDVDisplay();
 });
 

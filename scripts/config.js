@@ -94,6 +94,19 @@ export class Config {
       default: "right",
     });
 
+    game.settings.register(MODULE, "showWeaponNamesInDvDisplay", {
+      name: game.i18n.localize(
+        "diwako-cpred-additions.settings.dv-display-show-weapon-name.name"
+      ),
+      hint: game.i18n.localize(
+        "diwako-cpred-additions.settings.dv-display-show-weapon-name.hint"
+      ),
+      scope: "client",
+      config: true,
+      type: Boolean,
+      default: true,
+    });
+
     console.log("diwako-cpred-additions settings end");
   }
 }

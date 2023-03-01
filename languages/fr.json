@@ -18,7 +18,7 @@
         "hint": "Shows the DV of all equipped ranged weapons when hovering over another token. Have the token selected you want as source and hover over the token you want to hit"
       },
       "dv-display-combat-only": {
-        "name": "Show DV Display in combat only",
+        "name": "Show DV Display only during combat",
         "hint": "The DV Display is only shown on hover if there is current an active combat encounter"
       },
       "dv-display-position": {
@@ -26,6 +26,10 @@
         "hint": "Sets the position where the DV Display should be shown right next to the hovered token",
         "left": "Left",
         "right": "Right"
+      },
+      "dv-display-show-weapon-name": {
+        "name": "Show weapon names in the DV Display",
+        "hint": "The DV Display uses the weapon names when setting is enabled. It will use the weapon types when disabled"
       },
       "submit": "Soumettre",
       "add-sound": "Ajouter un Son"
@@ -41,7 +45,7 @@
       }
     },
     "dv-display": {
-      "dv-text": "{weapon-name}: {dv-value}DV\n"
+      "dv-text": "DV: {dv-value} {weapon-name}\n"
     }
   }
 }
