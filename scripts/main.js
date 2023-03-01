@@ -1,8 +1,33 @@
 import { Config } from "./config.js";
+import { DvDisplay } from "./dvDisplay.js";
+import { Utils } from "./utils.js";
+import { Constants } from "./constants.js";
 
 console.log("diwako-cpred-additions start");
 Hooks.once("init", function () {
+  libWrapper.register(
+    Constants.MODULE_NAME,
+    "Token.prototype.draw",
+    DvDisplay.registerWrapper,
+    "WRAPPER"
+  );
+  Token.prototype.showDVDisplay = DvDisplay.show;
+  Token.prototype.clearDVDisplay = DvDisplay.clear;
+
   Config.registerSettings();
+});
+
+Hooks.on("hoverToken", (token, hovered) => {
+  if (hovered) {
+    canvas.tokens.get(token.id)?.showDVDisplay();
+  } else {
+    canvas.tokens.get(token.id)?.clearDVDisplay();
+  }
+});
+
+Hooks.on("controlToken", (token, _) => {
+  // prevent display of DV info when selecting current hovered token
+  canvas.tokens.get(token.id)?.clearDVDisplay();
 });
 
 // Check if an attack hits or not
@@ -71,27 +96,9 @@ Hooks.on("createChatMessage", async function (message) {
     dvTable = dvTable + " (Autofire)";
   }
 
-  const a = canvas.grid.measureDistance(token, target, { gridSpaces: true });
-  const b = token.elevation - target.document.elevation;
-  const dist = Math.round(Math.sqrt(a * a + b * b));
-
-  const pack = game.packs.get("cyberpunk-red-core.dvTables");
-  const tableId = pack.index.getName(dvTable)?._id;
-  if (!tableId) {
-    console.log(
-      `diwako-cpred-additions ===== No compendium table found => ${dvTable}`
-    );
-    return;
-  }
-  const table = await pack.getDocument(tableId);
-  const draw = await table.getResultsForRoll(dist);
-  if (!draw || draw.length === 0) {
-    console.log(
-      `diwako-cpred-additions ===== Could not draw from compendium table => ${table.name}`
-    );
-    return;
-  }
-  const dv = parseInt(draw[0].text);
+  const dist = Utils.getDistance(token, target);
+  const dv = await Utils.getDV(dvTable, dist);
+  if (dv < 0) return;
 
   const messageReplaceMap = {
     attacker: token.name,
@@ -106,22 +113,11 @@ Hooks.on("createChatMessage", async function (message) {
   let backgroundColor = "#b90202ff";
   if (dv >= attackRoll) {
     if (target.document._actor.system.stats.ref.value >= 8) {
-      chatMessage = `<b>${token.name} <span class="fg-red">missed</span> ${
-        target.document.name
-      }</b> by ${
-        dv - attackRoll + 1
-      } according to the ranged DV (${dv})! Roll damage IF they have declared that they are dodging AND your roll has beat their evasion roll!`;
-
-      //   chatMessage = game.i18n.localize("diwako-cpred-additions.message.missed.evade");
       chatMessage = game.i18n.format(
         "diwako-cpred-additions.message.missed.evade",
         messageReplaceMap
       );
     } else {
-      chatMessage = `<b>${token.name} <span class="fg-red">missed</span> ${
-        target.document.name
-      }</b> by ${dv - attackRoll + 1} (DV: ${dv})!`;
-      //   chatMessage = game.i18n.localize("diwako-cpred-additions.message.missed.normal");
       chatMessage = game.i18n.format(
         "diwako-cpred-additions.message.missed.normal",
         messageReplaceMap
@@ -129,7 +125,7 @@ Hooks.on("createChatMessage", async function (message) {
     }
     if (
       window.Sequence &&
-      game.settings.get("diwako-cpred-additions", "hit-animations")
+      game.settings.get(Constants.MODULE_NAME, "hit-animations")
     ) {
       new Sequence()
         .effect()
@@ -138,7 +134,10 @@ Hooks.on("createChatMessage", async function (message) {
           "modules/jb2a_patreon/Library/Generic/UI/Miss_01_Red_200x200.webm"
         )
         .snapToGrid()
-        .atLocation(token, { gridUnits: true, offset: { x: 0, y: -0.55 } })
+        .atLocation(token, {
+          gridUnits: true,
+          offset: { x: 0, y: -0.55 },
+        })
         .scaleToObject(1.35)
         .locally(message.whisper.length != 0)
         .play();
@@ -146,22 +145,11 @@ Hooks.on("createChatMessage", async function (message) {
   } else {
     backgroundColor = "#2d9f36";
     if (target.document._actor.system.stats.ref.value >= 8) {
-      chatMessage = `<b>${
-        token.name
-      } <span class="fg-green">beats the ranged DV</span> </b>(${dv}, ${
-        attackRoll - dv
-      } over)<b> to hit ${target.document.name}</b> by ${
-        attackRoll - 1 - dv
-      }! Roll damage IF they have NOT declared that they are dodging OR your roll has beat their evasion roll!`;
-      //   chatMessage = game.i18n.localize("diwako-cpred-additions.message.hit.evade");
       chatMessage = game.i18n.format(
         "diwako-cpred-additions.message.hit.evade",
         messageReplaceMap
       );
     } else {
-      chatMessage = `<b>${token.name} <span class="fg-green">hits</span> ${
-        target.document.name
-      }</b> (DV: ${dv}, ${attackRoll - dv} over)! Roll damage!`;
       chatMessage = game.i18n.format(
         "diwako-cpred-additions.message.hit.normal",
         messageReplaceMap
@@ -171,9 +159,9 @@ Hooks.on("createChatMessage", async function (message) {
     if (window.Sequence) {
       const sequence = new Sequence();
       // sound effect
-      if (game.settings.get("diwako-cpred-additions", "hit-sounds")) {
+      if (game.settings.get(Constants.MODULE_NAME, "hit-sounds")) {
         const sounds = game.settings.get(
-          "diwako-cpred-additions",
+          Constants.MODULE_NAME,
           "configured-sounds"
         );
         if (sounds.length > 0) {
@@ -187,7 +175,7 @@ Hooks.on("createChatMessage", async function (message) {
         }
       }
       // blood effect
-      if (game.settings.get("diwako-cpred-additions", "hit-animations")) {
+      if (game.settings.get(Constants.MODULE_NAME, "hit-animations")) {
         let angle =
           (360 +
             Math.atan2(target.y - token.y, target.x - token.x) *

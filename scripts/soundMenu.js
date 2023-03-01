@@ -1,3 +1,5 @@
+import { Constants } from "./constants.js";
+
 export class SoundMenu extends FormApplication {
   constructor(object, options) {
     super(object, options);
@@ -22,7 +24,7 @@ export class SoundMenu extends FormApplication {
   async getData() {
     const data = super.getData().object;
     const moduleData = game.settings.get(
-      "diwako-cpred-additions",
+      Constants.MODULE_NAME,
       "configured-sounds"
     );
     data.userSounds = moduleData;
@@ -58,7 +60,7 @@ export class SoundMenu extends FormApplication {
         const element = pathsObjects[index];
         paths.push(element.value);
       }
-      game.settings.set("diwako-cpred-additions", "configured-sounds", paths);
+      game.settings.set(Constants.MODULE_NAME, "configured-sounds", paths);
     });
   }
 
@@ -66,9 +68,9 @@ export class SoundMenu extends FormApplication {
     const time = Date.now();
     let new_row = $(
       `<tr>
-            <th><input type="text" class="diw-audiopath" value="${path}" readonly/></th>
-            <th><a><i class="fa-solid fa-trash"></i></a></th>
-        </tr>`
+        <th><input type="text" class="diw-audiopath" value="${path}" readonly/></th>
+        <th><a><i class="fa-solid fa-trash"></i></a></th>
+      </tr>`
     );
     new_row.insertBefore(target);
     new_row

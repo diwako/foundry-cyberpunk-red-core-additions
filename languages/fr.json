@@ -13,6 +13,24 @@
         "name": "Selectionner un son de tir",
         "hint": "Selectionnez le son que vous voulez entendre quand un tir touche sa cible"
       },
+      "dv-display-show": {
+        "name": "Show DV Display on token hover",
+        "hint": "Shows the DV of all equipped ranged weapons when hovering over another token. Have the token selected you want as source and hover over the token you want to hit"
+      },
+      "dv-display-combat-only": {
+        "name": "Show DV Display only during combat",
+        "hint": "The DV Display is only shown on hover if there is current an active combat encounter"
+      },
+      "dv-display-position": {
+        "name": "Position of the DV Display at the token",
+        "hint": "Sets the position where the DV Display should be shown right next to the hovered token",
+        "left": "Left",
+        "right": "Right"
+      },
+      "dv-display-show-weapon-name": {
+        "name": "Show weapon names in the DV Display",
+        "hint": "The DV Display uses the weapon names when setting is enabled. It will use the weapon types when disabled"
+      },
       "submit": "Soumettre",
       "add-sound": "Ajouter un Son"
     },
@@ -25,6 +43,9 @@
         "normal": "<b>{attacker} <span class=\"fg-green\">touche</span> {target}</b> (DV: {dv}, {dv-diff} au-dessus)! Jetez les dégâts!",
         "evade": "<b>{attacker} <span class=\"fg-green\">Dépasse le SD à distance</span> </b>({dv}, {dv-diff} au-dessus)<b> pour toucher {target}</b> de {dv-diff-1}! Jetez les dégâts SI aucune esquive n'a été déclarée OU que votre jet dépasse celui de l'esquive"
       }
+    },
+    "dv-display": {
+      "dv-text": "DV: {dv-value} {weapon-name}\n"
     }
   }
 }

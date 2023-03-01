@@ -13,6 +13,24 @@
         "name": "Select hit sounds",
         "hint": "Select the sounds you want to be played when a token lands a hit on another"
       },
+      "dv-display-show": {
+        "name": "Show DV Display on token hover",
+        "hint": "Shows the DV of all equipped ranged weapons when hovering over another token. Have the token selected you want as source and hover over the token you want to hit"
+      },
+      "dv-display-combat-only": {
+        "name": "Show DV Display only during combat",
+        "hint": "The DV Display is only shown on hover if there is current an active combat encounter"
+      },
+      "dv-display-position": {
+        "name": "Position of the DV Display at the token",
+        "hint": "Sets the position where the DV Display should be shown right next to the hovered token",
+        "left": "Left",
+        "right": "Right"
+      },
+      "dv-display-show-weapon-name": {
+        "name": "Show weapon names in the DV Display",
+        "hint": "The DV Display uses the weapon names when setting is enabled. It will use the weapon types when disabled"
+      },
       "submit": "Submit",
       "add-sound": "Add sound"
     },
@@ -25,6 +43,9 @@
         "normal": "<b>{attacker} <span class=\"fg-green\">hits</span> {target}</b> (DV: {dv}, {dv-diff} over)! Roll Damage!",
         "evade": "<b>{attacker} <span class=\"fg-green\">beats the ranged DV</span> </b>({dv}, {dv-diff} over)<b> to hit {target}</b> by {dv-diff-1}! Roll damage IF they have NOT declared that they are dodging OR your roll has beat their evasion roll"
       }
+    },
+    "dv-display": {
+      "dv-text": "DV: {dv-value} {weapon-name}\n"
     }
   }
 }
