@@ -66,9 +66,9 @@ export class SoundMenu extends FormApplication {
     const time = Date.now();
     let new_row = $(
       `<tr>
-            <th><input type="text" class="diw-audiopath" value="${path}" readonly/></th>
-            <th><a><i class="fa-solid fa-trash"></i></a></th>
-        </tr>`
+                <th><input type="text" class="diw-audiopath" value="${path}" readonly/></th>
+                <th><a><i class="fa-solid fa-trash"></i></a></th>
+            </tr>`
     );
     new_row.insertBefore(target);
     new_row
