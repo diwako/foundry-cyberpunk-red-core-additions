@@ -65,6 +65,17 @@ export class DvDisplay {
             }
           }
         }
+
+        // check if weapon is autofire capable
+        if (obj.system.fireModes.suppressiveFire) {
+          let dv = await Utils.getDV(obj.system.dvTable + " (Autofire)", dist);
+          if (!dv || dv == -1) continue;
+
+          const newText = generateDisplayText(obj, showWeaponNames, dv, true);
+          if (newText === "") continue;
+          num++;
+          displayText += newText;
+        }
       }
     }
 
@@ -101,23 +112,26 @@ export class DvDisplay {
   }
 }
 
-function generateDisplayText(item, showWeaponNames, dv) {
+function generateDisplayText(item, showWeaponNames, dv, autofire = false) {
   let name = item.name;
-
+  let duplicateCheckValue = item.name;
   if (showWeaponNames === false) {
-    if (SHOWN_WEAPONS.includes(item.system.weaponType)) {
-      return "";
-    }
-    SHOWN_WEAPONS.push(item.system.weaponType);
     name = game.i18n.localize(
       Constants.WEAPON_TYPE_LIST[item.system.weaponType]
     );
-  } else {
-    if (SHOWN_WEAPONS.includes(item.name)) {
-      return "";
-    }
-    SHOWN_WEAPONS.push(item.name);
+    duplicateCheckValue = item.system.weaponType;
   }
+
+  if (autofire) {
+    name += " (Autofire)";
+    duplicateCheckValue += " (Autofire)";
+  }
+
+  if (SHOWN_WEAPONS.includes(duplicateCheckValue)) {
+    return "";
+  }
+  SHOWN_WEAPONS.push(duplicateCheckValue);
+
   return game.i18n.format("diwako-cpred-additions.dv-display.dv-text", {
     "weapon-name": name,
     "dv-value": dv,
