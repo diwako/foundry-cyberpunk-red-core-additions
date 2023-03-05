@@ -36,7 +36,7 @@ export class Config {
       hint: "diwako-cpred-additions.settings.sound-select.hint",
       icon: "fas fa-cog",
       type: SoundMenu,
-      restricted: false,
+      restricted: true,
     });
 
     game.settings.register(Constants.MODULE_NAME, "configured-sounds", {
