@@ -46,6 +46,18 @@
     },
     "dv-display": {
       "dv-text": "DV: {dv-value} {weapon-name}\n"
+    },
+    "cover": {
+      "dialog": {
+        "title": "Create cover token",
+        "description": "Create a cover token with its HP based on its material. Select from a set preset drop down or mix and match how you need it.<br/>Height and Width values are in <b>grid size values</b>!",
+        "preset": "Preset",
+        "material": "Material",
+        "hp": "HP",
+        "height": "Height",
+        "width": "Width"
+      },
+      "only-gm": "This function is only usable by a GM!"
     }
   }
 }

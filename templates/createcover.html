@@ -1,0 +1,124 @@
+<form autocomplete="off" onsubmit="event.preventDefault()">
+  <p>{{ localize "diwako-cpred-additions.cover.dialog.description" }}</p>
+  <br />
+  <label for="presets"
+    >{{ localize "diwako-cpred-additions.cover.dialog.preset" }}:</label
+  >
+  <select name="presets" id="preset">
+    {{#each presets}}
+    <option value="{{material}}">{{name}}</option>
+    {{/each}}
+  </select>
+  <br />
+  <table>
+    <tr>
+      <th>
+        <label for="material"
+          >{{ localize "diwako-cpred-additions.cover.dialog.material" }}:</label
+        >
+        <select name="material" id="material">
+          {{#each materials}}
+          <option value="{{value}}" hp="{{hp}}" id="material_{{value}}">
+            {{name}}
+          </option>
+          {{/each}}
+        </select>
+      </th>
+      <th>
+        <label for="hp"
+          >{{ localize "diwako-cpred-additions.cover.dialog.hp" }}:</label
+        >
+        <input name="hp" id="hp" readonly type="number" />
+      </th>
+    </tr>
+    <tr>
+      <th>
+        <label for="height"
+          >{{ localize "diwako-cpred-additions.cover.dialog.height" }}:</label
+        >
+        <input
+          type="range"
+          id="height"
+          name="height"
+          min="0.5"
+          max="10"
+          step="0.5"
+          value="1"
+        />
+      </th>
+      <th><input id="height-show" type="text" disabled /></th>
+    </tr>
+    <tr>
+      <th>
+        <label for="width"
+          >{{ localize "diwako-cpred-additions.cover.dialog.width" }}:</label
+        >
+        <input
+          type="range"
+          id="width"
+          name="width"
+          min="0.5"
+          max="10"
+          step="0.5"
+          value="1"
+        />
+      </th>
+      <th><input id="width-show" type="text" disabled /></th>
+    </tr>
+  </table>
+</form>
+<script>
+  function onPresetUpdate() {
+    const value = document.querySelector("#preset").value;
+    document.querySelector("#material").value = value;
+    if (value != "custom") onMaterialUpdate(false);
+  }
+
+  function onMaterialUpdate(resetPresets) {
+    let material = document.querySelector("#material");
+    let hp = document.querySelector("#hp");
+    if (material.value != "custom") {
+      const hpValue = document
+        .querySelector(`#material_${material.value}`)
+        .getAttribute("hp");
+      hp.value = hpValue;
+      hp.setAttribute("readonly", "");
+    } else {
+      hp.value = 15;
+      hp.removeAttribute("readonly");
+    }
+    if (resetPresets) {
+      const presets = document.querySelector("#preset");
+      for (var i = 0; i < presets.length; i++) {
+        presets[i].selectedIndex = 0;
+      }
+      presets.value = "custom";
+    }
+  }
+
+  function onHeightUpdate() {
+    document.querySelector("#height-show").value =
+      document.querySelector("#height").value;
+  }
+
+  function onWidthUpdate() {
+    document.querySelector("#width-show").value =
+      document.querySelector("#width").value;
+  }
+
+  document
+    .querySelector("#preset")
+    .addEventListener("input", (event) => onPresetUpdate());
+  document
+    .querySelector("#material")
+    .addEventListener("input", (event) => onMaterialUpdate(true));
+  document
+    .querySelector("#height")
+    .addEventListener("change", (event) => onHeightUpdate());
+  document
+    .querySelector("#width")
+    .addEventListener("change", (event) => onWidthUpdate());
+  onMaterialUpdate(false);
+  onHeightUpdate();
+  onWidthUpdate();
+</script>
