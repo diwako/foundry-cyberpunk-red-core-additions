@@ -1,38 +1,6 @@
 import { Constants } from "./constants.js";
 
-const materials = [
-  { value: "steel_thin", name: "Steel (thin)", hp: 25 },
-  { value: "steel_thick", name: "Steel (thick)", hp: 50 },
-
-  { value: "stone_thin", name: "Stone (thin)", hp: 20 },
-  { value: "stone_thick", name: "Stone (thick)", hp: 40 },
-
-  { value: "bulletproofglass_thin", name: "Bulletproof Glass (thin)", hp: 15 },
-  {
-    value: "bulletproofglass_thick",
-    name: "Bulletproof Glass (thick)",
-    hp: 30,
-  },
-
-  { value: "concrete_thin", name: "Concrete (thin)", hp: 10 },
-  { value: "concrete_thick", name: "Concrete (thick)", hp: 25 },
-
-  { value: "wood_thin", name: "Wood (thin)", hp: 5 },
-  { value: "wood_thick", name: "Wood (thick)", hp: 20 },
-
-  {
-    value: "plaster_foam_plastic_thin",
-    name: "Plaster/Foam/Plastic (thin)",
-    hp: 0,
-  },
-  {
-    value: "plaster_foam_plastic_thick",
-    name: "Plaster/Foam/Plastic (thick)",
-    hp: 15,
-  },
-
-  { value: "custom", name: "Custom Value", hp: -1 },
-];
+let materials = [];
 
 const presets = [
   { name: "Choose...", material: "custom" },
@@ -47,19 +15,19 @@ const presets = [
   { name: "Hydrant", material: "steel_thick" },
   { name: "Log Cabin Wall", material: "wood_thick" },
   { name: "Metal Door", material: "steel_thin" },
-  { name: "Office Cubicle", material: "plaster_foam_plastic_thin" },
-  { name: "Office Wall", material: "plaster_foam_plastic_thick" },
+  { name: "Office Cubicle", material: "plaster-foam-plastic_thin" },
+  { name: "Office Wall", material: "plaster-foam-plastic_thick" },
   { name: "Overturned Table", material: "wood_thin" },
   { name: "Prison Visitation Glass", material: "bulletproofglass_thin" },
   { name: "Refrigerator", material: "steel_thin" },
   { name: "Shipping Container", material: "steel_thin" },
-  { name: "Sofa", material: "plaster_foam_plastic_thin" },
+  { name: "Sofa", material: "plaster-foam-plastic_thin" },
   { name: "Statue", material: "stone_thin" },
   { name: "Tree", material: "wood_thick" },
   { name: "Utility Pole", material: "concrete_thick" },
   { name: "Wardrobe", material: "wood_thin" },
   { name: "Wardrobe", material: "wood_thin" },
-  { name: "Windshield", material: "plaster_foam_plastic_thin" },
+  { name: "Windshield", material: "plaster-foam-plastic_thin" },
   { name: "Wooden Door", material: "wood_thin" },
 ];
 
@@ -70,6 +38,9 @@ export class Cover {
         game.i18n.localize("diwako-cpred-additions.cover.only-gm")
       );
       return;
+    }
+    if (materials.length === 0) {
+      init();
     }
     const data = {
       presets: presets,
@@ -86,12 +57,12 @@ export class Cover {
         button1: {
           label: game.i18n.localize("CPR.dialog.common.confirm"),
           callback: async (html) => {
-            createCoverToken(html);
+            extractData(html);
           },
           icon: `<i class="fas fa-check"></i>`,
         },
         button2: {
-          label: game.i18n.localize("CPR.dialog.common.cancel"),
+          label: game.i18n.localize("Cancel"),
           callback: async () => {},
           icon: `<i class="fas fa-times"></i>`,
         },
@@ -100,10 +71,50 @@ export class Cover {
   }
 }
 
-async function createCoverToken(html) {
-  const height = parseInt(html.find("[id=height]")[0].value);
-  const width = parseInt(html.find("[id=width]")[0].value);
+function createMaterial(id, hp, thin) {
+  return {
+    value: `${id}_${thin ? "thin" : "thick"}`,
+    name: game.i18n.format("diwako-cpred-additions.cover.materials.display", {
+      material: game.i18n.localize(
+        `diwako-cpred-additions.cover.materials.${id}`
+      ),
+      thickness: game.i18n.localize(
+        `diwako-cpred-additions.cover.materials.${thin ? "thin" : "thick"}`
+      ),
+    }),
+    hp: hp,
+  };
+}
+
+function init() {
+  materials = [
+    createMaterial("steel", 25, true),
+    createMaterial("steel", 50, false),
+    createMaterial("stone", 20, true),
+    createMaterial("stone", 40, false),
+    createMaterial("bulletproofglass", 15, true),
+    createMaterial("bulletproofglass", 30, false),
+    createMaterial("concrete", 10, true),
+    createMaterial("concrete", 25, false),
+    createMaterial("wood", 5, true),
+    createMaterial("wood", 20, false),
+    createMaterial("plaster-foam-plastic", 0, true),
+    createMaterial("plaster-foam-plastic", 15, false),
+    { value: "custom", name: game.i18n.localize("NOTE.Custom"), hp: -1 },
+  ];
+}
+
+async function extractData(html) {
+  const height = parseFloat(html.find("[id=height]")[0].value);
+  const width = parseFloat(html.find("[id=width]")[0].value);
   const hp = parseInt(html.find("[id=hp]")[0].value);
+
+  if (hp <= 0) {
+    ui.notifications.error(
+      game.i18n.localize("diwako-cpred-additions.cover.zero-hp-no-cover")
+    );
+    return;
+  }
 
   let name = "";
   const preset = html.find("[id=preset]")[0];
@@ -118,12 +129,11 @@ async function createCoverToken(html) {
   if (window.warpgate) {
     let location = await warpgate.crosshairs.show({
       size: 1,
-      icon: "icons/svg/hazard.svg",
+      icon: "systems/cyberpunk-red-core/icons/compendium/armor/bullet_proof_shield.svg",
       label: name,
-      // labelOffset: {x:0, y:-canvas.grid.size*3},
       drawIcon: true,
       drawOutline: false,
-      interval: -1,
+      interval: 2,
     });
 
     if (location.cancelled) {
@@ -138,34 +148,92 @@ async function createCoverToken(html) {
     position = [x, y];
   }
 
-  console.log({ name, height, width, hp, position });
+  createToken(name, height, width, position, hp);
+}
 
-  let actorName = "Group";
-  let actor = game.actors.getName(actorName);
+async function getActor() {
+  let actor = game.actors.get(
+    game.settings.get(Constants.MODULE_NAME, "coverActorId")
+  );
 
-  if (actor) {
-    const data = await actor.getTokenDocument({
-      x: position[0] - canvas.grid.size * (width / 2),
-      y: position[1] - canvas.grid.size * (height / 2),
-      name: name,
-    });
-    const flags = data.flags;
-    if (!flags["cyberpunk-red-core"]) {
-      flags["cyberpunk-red-core"] = {};
-    }
-    flags["cyberpunk-red-core"]["isCover"] = true;
-
-    const newData = foundry.utils.mergeObject(data, {
-      height: height,
-      width: width,
-      flags: flags,
-      hidden: true,
-    });
-
-    let token = await canvas.scene.createEmbeddedDocuments("Token", [newData]);
-    console.log({token: token[0], newData});
-    ui.notifications.notify(`Created new token for actor ${actorName}.`);
-  } else {
-    ui.notifications.notify(`No actor found with name ${actorName}.`);
+  if (!actor) {
+    actor = await createActor();
   }
+
+  return actor;
+}
+
+async function createActor() {
+  const name = game.i18n.localize(
+    "diwako-cpred-additions.cover.default-actor-name"
+  );
+  const actorData = {
+    name: name,
+    type: "mook",
+    img: "systems/cyberpunk-red-core/icons/compendium/armor/bullet_proof_shield.svg",
+  };
+
+  const actor = await Actor.create(actorData);
+
+  const flags = {};
+  flags["cyberpunk-red-core"] = {};
+  flags["cyberpunk-red-core"]["isCover"] = true;
+  flags.healthEstimate = {
+    dontMarkDead: true,
+    hideHealthEstimate: true,
+    hideName: false,
+  };
+
+  await actor.update({
+    prototypeToken: {
+      name: name,
+      actorLink: false,
+      vision: false,
+      displayBars: 40,
+      displayName: 30,
+      disposition: 0,
+      flags: flags,
+    },
+  });
+
+  await game.settings.set(Constants.MODULE_NAME, "coverActorId", actor.id);
+  ui.notifications.notify(
+    game.i18n.format("diwako-cpred-additions.cover.created-actor", {
+      "actor-name": name,
+    })
+  );
+
+  return actor;
+}
+
+async function createToken(name, height, width, position, hp) {
+  height = Math.max(height, 0.5);
+  width = Math.max(width, 0.5);
+
+  const actor = await getActor();
+  const data = await actor.getTokenDocument({
+    x: 0,
+    y: 0,
+    name: name,
+  });
+
+  let token = (await canvas.scene.createEmbeddedDocuments("Token", [data]))[0];
+
+  const update = {
+    _id: token._id,
+    height: height,
+    width: width,
+    hidden: game.settings.get(Constants.MODULE_NAME, "hideCoverTokenOnPlace"),
+    name: name,
+    x: position[0] - canvas.grid.size * (width / 2),
+    y: position[1] - canvas.grid.size * (height / 2),
+    ["actorData.system.derivedStats.hp.max"]: hp,
+    ["actorData.system.derivedStats.hp.value"]: hp,
+    ["texture.scaleX"]: 1,
+    ["texture.scaleY"]: height / width,
+  };
+
+  await canvas.scene.updateEmbeddedDocuments("Token", [update], {
+    animate: false,
+  });
 }
