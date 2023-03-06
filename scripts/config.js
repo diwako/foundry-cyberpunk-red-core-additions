@@ -110,6 +110,26 @@ export class Config {
       }
     );
 
+    game.settings.register(Constants.MODULE_NAME, "hideCoverTokenOnPlace", {
+      name: game.i18n.localize(
+        "diwako-cpred-additions.settings.cover-token-hide-on-place.name"
+      ),
+      hint: game.i18n.localize(
+        "diwako-cpred-additions.settings.cover-token-hide-on-place.hint"
+      ),
+      scope: "world",
+      config: true,
+      type: Boolean,
+      default: true,
+    });
+
+    game.settings.register(Constants.MODULE_NAME, "coverActorId", {
+      scope: "world",
+      config: false,
+      default: "",
+      type: String,
+    });
+
     console.log("diwako-cpred-additions settings end");
   }
 }

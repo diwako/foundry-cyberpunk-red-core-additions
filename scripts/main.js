@@ -2,6 +2,7 @@ import { Config } from "./config.js";
 import { DvDisplay } from "./dvDisplay.js";
 import { Utils } from "./utils.js";
 import { Constants } from "./constants.js";
+import { Cover } from "./Cover.js";
 
 console.log("diwako-cpred-additions start");
 Hooks.once("init", function () {
@@ -234,5 +235,11 @@ Hooks.on("createChatMessage", async function (message) {
     }
   );
 });
+
+const api = {};
+api.funcs = {};
+api.funcs.createCover = Cover.CreateCover;
+
+self.cpr_additions = api;
 
 console.log("diwako-cpred-additions end");

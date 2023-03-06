@@ -41,6 +41,15 @@
       }
     ]
   },
+  "packs": [
+    {
+      "label": "CPR Additions: Macros",
+      "name": "cpr-additions-macros",
+      "path": "./packs/cpr-additions-macros.db",
+      "system": "cyberpunk-red-core",
+      "type": "Macro"
+    }
+  ],
   "compatibility": {
     "minimum": "10",
     "verified": "10"

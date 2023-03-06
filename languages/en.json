@@ -31,6 +31,10 @@
         "name": "Show weapon names in the DV Display",
         "hint": "The DV Display uses the weapon names when setting is enabled. It will use the weapon types when disabled"
       },
+      "cover-token-hide-on-place": {
+        "name": "Hide cover token on place",
+        "hint": "Hides the the cover token when created through the macro. GMs will be able to see it, but players will not."
+      },
       "submit": "Submit",
       "add-sound": "Add sound"
     },
@@ -46,6 +50,29 @@
     },
     "dv-display": {
       "dv-text": "DV: {dv-value} {weapon-name}\n"
+    },
+    "cover": {
+      "dialog": {
+        "title": "Create cover token",
+        "description": "Create a cover token with its HP based on its material. Select from a set preset drop down or mix and match how you need it.\nHeight and Width values are in <b>grid size values</b>!",
+        "preset": "Preset",
+        "material": "Material"
+      },
+      "materials": {
+        "display": "{material} ({thickness})",
+        "thin": "thin",
+        "thick": "thick",
+        "steel": "Steel",
+        "stone": "Stone",
+        "bulletproofglass": "Bulletproof Glass",
+        "concrete": "Concrete",
+        "wood": "Wood",
+        "plaster-foam-plastic": "Plaster/Foam/Plastic"
+      },
+      "only-gm": "This function is only usable by a GM!",
+      "default-actor-name": "Cover Helper",
+      "created-actor": "Created default actor for cover tokens: \"{actor-name}\"",
+      "zero-hp-no-cover": "Anything with 0 HP is not considered cover, it might be used as concealment!"
     }
   }
 }
