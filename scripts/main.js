@@ -2,7 +2,7 @@ import { Config } from "./config.js";
 import { DvDisplay } from "./dvDisplay.js";
 import { Utils } from "./utils.js";
 import { Constants } from "./constants.js";
-import { Cover } from "./Cover.js";
+import { Cover } from "./cover.js";
 
 console.log("diwako-cpred-additions start");
 Hooks.once("init", function () {
