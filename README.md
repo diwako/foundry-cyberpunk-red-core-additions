@@ -40,6 +40,14 @@ Can either show weapon names, or weapon types. Text can be displayed left or rig
 
 ![DV Display example](images/dv-display.png)
 
+### Cover Tokens
+
+Inside this module a new macro has been shipped called `Create Cover`. This macro will create a token with HP according to the material list found in the core rule book. Several presets for easier selection are provided as well. These tokens are invisible to players by default, but a setting has been added to make them visible upon creation.
+
+![Cover Token example](images/cover-tokens.png)
+
+This feature will create a dummy actor called `Cover Helper` which the GM can just put into a folder and forget. Deletion of the actor is fine as well, the macro would create a new one if there is a need for it again.
+
 ### Item Piles Module features
 
 [Items Piles](https://github.com/fantasycalendar/FoundryVTT-ItemPiles/) is great, I fully recommend that module, sadly it can break character sheets if you drop, store, or sell an upgraded item using an Item Piles functionality.
