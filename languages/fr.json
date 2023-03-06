@@ -14,65 +14,65 @@
         "hint": "Selectionnez le son que vous voulez entendre quand un tir touche sa cible"
       },
       "dv-display-show": {
-        "name": "Show DV Display on token hover",
-        "hint": "Shows the DV of all equipped ranged weapons when hovering over another token. Have the token selected you want as source and hover over the token you want to hit"
+        "name": "Affiche le SD au survol du Token",
+        "hint": "Affiche le SD de toutes les armes à distance équipées lorsque vous survolez un autre jeton. Ayez le jeton sélectionné que vous voulez comme source et survolez le jeton que vous voulez toucher"
       },
       "dv-display-combat-only": {
-        "name": "Show DV Display only during combat",
-        "hint": "The DV Display is only shown on hover if there is current an active combat encounter"
+        "name": "Montre le SD uniquement durant le combat",
+        "hint": "L'affichage du SD ne s'affiche au survol que si une rencontre de combat est en cours"
       },
       "dv-display-position": {
-        "name": "Position of the DV Display at the token",
-        "hint": "Sets the position where the DV Display should be shown right next to the hovered token",
-        "left": "Left",
-        "right": "Right"
+        "name": "Position de l'affichage du SD près du Token",
+        "hint": "Définit la position où l'affichage du SD doit être affiché juste à côté du jeton survolé",
+        "left": "Gauche",
+        "right": "Droite"
       },
       "dv-display-show-weapon-name": {
         "name": "Show weapon names in the DV Display",
         "hint": "The DV Display uses the weapon names when setting is enabled. It will use the weapon types when disabled"
       },
       "cover-token-hide-on-place": {
-        "name": "Hide cover token on place",
-        "hint": "Hides the the cover token when created through the macro. GMs will be able to see it, but players will not."
+        "name": "Cacher le token de couverture en place",
+        "hint": "Cache le jeton de couverture lorsqu'il est créé par la macro. Les MJ pourront le voir, mais pas les joueurs."
       },
       "submit": "Soumettre",
       "add-sound": "Ajouter un Son"
     },
     "message": {
       "missed": {
-        "normal": "<b>{attacker} <span class=\"fg-red\">rate</span> {target}</b> de {dv-diff+1} (DV: {dv})!",
+        "normal": "<b>{attacker} <span class=\"fg-red\">rate</span> {target}</b> de {dv-diff+1} (SD: {dv})!",
         "evade": "<b>{attacker} <span class=\"fg-red\">rate</span> {target}</b> de {dv-diff+1} selon le SD à distance ({dv})! Jetez les dégâts SI une esquive a été déclarée ET que votre jet est supérieur à celui de l'esquive!"
       },
       "hit": {
-        "normal": "<b>{attacker} <span class=\"fg-green\">touche</span> {target}</b> (DV: {dv}, {dv-diff} au-dessus)! Jetez les dégâts!",
+        "normal": "<b>{attacker} <span class=\"fg-green\">touche</span> {target}</b> (SD: {dv}, {dv-diff} au-dessus)! Jetez les dégâts!",
         "evade": "<b>{attacker} <span class=\"fg-green\">Dépasse le SD à distance</span> </b>({dv}, {dv-diff} au-dessus)<b> pour toucher {target}</b> de {dv-diff-1}! Jetez les dégâts SI aucune esquive n'a été déclarée OU que votre jet dépasse celui de l'esquive"
       }
     },
     "dv-display": {
-      "dv-text": "DV: {dv-value} {weapon-name}\n"
+      "dv-text": "SD: {dv-value} {weapon-name}\n"
     },
     "cover": {
       "dialog": {
-        "title": "Create cover token",
-        "description": "Create a cover token with its HP based on its material. Select from a set preset drop down or mix and match how you need it.\nHeight and Width values are in <b>grid size values</b>!",
-        "preset": "Preset",
-        "material": "Material"
+        "title": "Créer un Token de couverture",
+        "description": "Créer un token de couverture avec son SP basé sur son matériau. Sélectionnez un préréglage du menu déroulant ou personnalisez votre couvert au besoin.\nLes valeurs de hauteur et de largeur sont en <b>grid size values</b>!",
+        "preset": "Préréglage",
+        "material": "Materiau"
       },
       "materials": {
         "display": "{material} ({thickness})",
-        "thin": "thin",
-        "thick": "thick",
-        "steel": "Steel",
-        "stone": "Stone",
-        "bulletproofglass": "Bulletproof Glass",
-        "concrete": "Concrete",
-        "wood": "Wood",
-        "plaster-foam-plastic": "Plaster/Foam/Plastic"
+        "thin": "Fin",
+        "thick": "Épais",
+        "steel": "Acier",
+        "stone": "Pierre",
+        "bulletproofglass": "Verre pare-balles",
+        "concrete": "Béton",
+        "wood": "Bois",
+        "plaster-foam-plastic": "Plâtre/Mousse/Plastique"
       },
-      "only-gm": "This function is only usable by a GM!",
-      "default-actor-name": "Cover Helper",
-      "created-actor": "Created default actor for cover tokens: \"{actor-name}\"",
-      "zero-hp-no-cover": "Anything with 0 HP is not considered cover, it might be used as concealment!"
+      "only-gm": "Cette fonction est uniquement utilisable par un MJ!",
+      "default-actor-name": "Couverture",
+      "created-actor": "Acteur créé par défaut pour les tokens de couvertures: \"{actor-name}\"",
+      "zero-hp-no-cover": "Tout ce qui a 0 PS n'est pas un couvert, mais peut être utilisé pour se dissimuler!"
     }
   }
 }
