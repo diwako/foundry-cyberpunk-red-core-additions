@@ -28,8 +28,8 @@
         "right": "Droite"
       },
       "dv-display-show-weapon-name": {
-        "name": "Show weapon names in the DV Display",
-        "hint": "The DV Display uses the weapon names when setting is enabled. It will use the weapon types when disabled"
+        "name": "Montre les noms d'armes à l'affichage du SD",
+        "hint": "L'affichage du SD utilise les noms d'armes quand activé. Il utilisera les types d'armes lorsque désactivé"
       },
       "cover-token-hide-on-place": {
         "name": "Cacher le token de couverture en place",
