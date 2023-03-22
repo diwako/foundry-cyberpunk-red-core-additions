@@ -47,6 +47,7 @@ export class DvDisplay {
             if (!upgrade.system.type === "weapon") continue;
             const upgradeDocument = token.actor.items.get(upgrade._id);
             if (
+              upgradeDocument &&
               upgradeDocument.system.isRanged &&
               upgradeDocument.system.isInstalled &&
               upgradeDocument.system.dvTable &&
