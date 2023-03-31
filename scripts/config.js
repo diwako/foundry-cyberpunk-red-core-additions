@@ -130,6 +130,19 @@ export class Config {
       type: String,
     });
 
+    game.settings.register(Constants.MODULE_NAME, "poorWeaponCheck", {
+      name: game.i18n.localize(
+        "diwako-cpred-additions.settings.poor-weapon-check.name"
+      ),
+      hint: game.i18n.localize(
+        "diwako-cpred-additions.settings.poor-weapon-check.hint"
+      ),
+      scope: "world",
+      config: true,
+      type: Boolean,
+      default: true,
+    });
+
     console.log("diwako-cpred-additions settings end");
   }
 }
