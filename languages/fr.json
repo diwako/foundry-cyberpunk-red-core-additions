@@ -80,8 +80,8 @@
     },
     "poor-weapon-check": {
       "word-indicator": "(poor)",
-      "ranged-weapon": "Upon attacking with the ranged weapon \"{weapon}\" <b><span class=\"fg-red\">jams</span></b>!",
-      "melee-weapon": "Upon attacking with the melee weapon \"{weapon}\" <b><span class=\"fg-red\">breaks</span></b> and is <b>not usable anymore</b>!"
+      "ranged-weapon": "Upon attacking with the ranged weapon \"{weapon}\",it <b><span class=\"fg-red\">jams</span></b>!",
+      "melee-weapon": "Upon attacking with the melee weapon \"{weapon}\", it <b><span class=\"fg-red\">breaks</span></b>, and is <b>not usable anymore</b>!"
     }
   }
 }
