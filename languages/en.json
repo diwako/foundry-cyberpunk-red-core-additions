@@ -35,6 +35,10 @@
         "name": "Hide cover token on place",
         "hint": "Hides the the cover token when created through the macro. GMs will be able to see it, but players will not."
       },
+      "poor-weapon-check": {
+        "name": "Check if poor quality weapons should jam",
+        "hint": "Checks each attack roll if a poor quality weapon should jam or break. Do mind that quality of weapons is noted in their weapon name such as (Poor)! This is important for this to work!"
+      },
       "submit": "Submit",
       "add-sound": "Add sound"
     },
@@ -73,6 +77,11 @@
       "default-actor-name": "Cover Helper",
       "created-actor": "Created default actor for cover tokens: \"{actor-name}\"",
       "zero-hp-no-cover": "Anything with 0 HP is not considered cover, it might be used as concealment!"
+    },
+    "poor-weapon-check": {
+      "word-indicator": "(poor)",
+      "ranged-weapon": "Upon attacking the ranged weapon \"{weapon}\" <b><span class=\"fg-red\">jams</span></b>!",
+      "melee-weapon": "Upon attacking the melee weapon \"{weapon}\" <b><span class=\"fg-red\">breaks</span></b> and is <b>not usable anymore</b>!"
     }
   }
 }

@@ -35,6 +35,10 @@
         "name": "Cacher le token de couverture en place",
         "hint": "Cache le jeton de couverture lorsqu'il est créé par la macro. Les MJ pourront le voir, mais pas les joueurs."
       },
+      "poor-weapon-jam-check": {
+        "name": "Check if poor quality weapons should jam",
+        "hint": "Checks each attack roll if a poor quality weapon should jam or break. Do mind that quality of weapons is noted in their weapon name such as (Poor)! This is important for this to work!"
+      },
       "submit": "Soumettre",
       "add-sound": "Ajouter un Son"
     },
@@ -73,6 +77,11 @@
       "default-actor-name": "Couverture",
       "created-actor": "Acteur créé par défaut pour les tokens de couvertures: \"{actor-name}\"",
       "zero-hp-no-cover": "Tout ce qui a 0 PS n'est pas un couvert, mais peut être utilisé pour se dissimuler!"
+    },
+    "poor-weapon-check": {
+      "word-indicator": "(poor)",
+      "ranged-weapon": "Upon attacking the ranged weapon \"{weapon}\" <b><span class=\"fg-red\">jams</span></b>!",
+      "melee-weapon": "Upon attacking the melee weapon \"{weapon}\" <b><span class=\"fg-red\">breaks</span></b> and is <b>not usable anymore</b>!"
     }
   }
 }
