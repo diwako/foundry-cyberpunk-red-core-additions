@@ -54,6 +54,8 @@ In Cyberpunk Red, poor weapons can jam or break when the attacker rolls a 1 on t
 
 The feature can be turned off by the GM, it is default enabled.
 
+**Make sure poor quality weapons have the identifier `(Poor)` or language equivalent in its item name!**
+
 ### Item Piles Module features
 
 [Items Piles](https://github.com/fantasycalendar/FoundryVTT-ItemPiles/) is great, I fully recommend that module, sadly it can break character sheets if you drop, store, or sell an upgraded item using an Item Piles functionality.
