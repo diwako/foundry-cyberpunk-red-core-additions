@@ -48,6 +48,12 @@ Inside this module a new macro has been shipped called `Create Cover`. This macr
 
 This feature will create a dummy actor called `Cover Helper` which the GM can just put into a folder and forget. Deletion of the actor is fine as well, the macro would create a new one if there is a need for it again.
 
+### Poor Weapon Check
+
+In Cyberpunk Red, poor weapons can jam or break when the attacker rolls a 1 on the first D10. This feature shows a reminder message in the text chat that a poor weapon just jammed or broke.
+
+The feature can be turned off by the GM, it is default enabled.
+
 ### Item Piles Module features
 
 [Items Piles](https://github.com/fantasycalendar/FoundryVTT-ItemPiles/) is great, I fully recommend that module, sadly it can break character sheets if you drop, store, or sell an upgraded item using an Item Piles functionality.
