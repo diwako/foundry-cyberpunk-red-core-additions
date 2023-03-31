@@ -25,7 +25,7 @@ Hooks.on("createChatMessage", async function (message) {
   const isFail = DIV.querySelector(".d10")
     .getAttribute("src")
     .includes("d10_1_fail.svg");
-  // if (!isFail) return;
+  if (!isFail) return;
 
   let token =
     message.speaker?.token ||
@@ -60,7 +60,7 @@ Hooks.on("createChatMessage", async function (message) {
   ChatMessage.create(
     {
       speaker: message.speaker,
-      content: `<div class="cpr-block" style="padding:10px;">${game.i18n.format(
+      content: `<div class="cpr-block" style="padding:10px;display:block">${game.i18n.format(
         stringKey,
         messageReplaceMap
       )}</div>`,
