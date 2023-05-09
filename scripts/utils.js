@@ -12,7 +12,11 @@ export class Utils {
   static async getDV(dvTable, dist) {
     let cachedData = DV_CACHE.get(dvTable);
     if (!cachedData) {
-      const pack = game.packs.get("cyberpunk-red-core.dvTables");
+      let pack = game.packs.get("cyberpunk-red-core.dv-tables");
+      if (!pack) {
+        // fallback for older version
+        pack = game.packs.get("cyberpunk-red-core.dvTables");
+      }
       const tableId = pack.index.getName(dvTable)?._id;
       if (!tableId) {
         console.log(
