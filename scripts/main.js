@@ -18,6 +18,7 @@ Hooks.once("init", function () {
   Token.prototype.clearDVDisplay = DvDisplay.clear;
 
   Config.registerSettings();
+  DFAmbientLightsAndAA.initialize();
 });
 
 Hooks.on("hoverToken", (token, hovered) => {

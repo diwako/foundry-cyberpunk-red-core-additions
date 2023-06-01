@@ -1,11 +1,37 @@
 import { Utils } from "./utils.js";
 import { Constants } from "./constants.js";
 
-export class DFAmbientLightsAndAA {}
+export class DFAmbientLightsAndAA {
+  static initialize() {
+    if (
+      game.modules.get("df-active-lights")?.active &&
+      game.modules.get("autoanimations")?.active
+    ) {
+      game.settings.register(Constants.MODULE_NAME, "dfAmbientLights-enable", {
+        name: game.i18n.localize(
+          "diwako-cpred-additions.settings.dfAmbientLights-enable.name"
+        ),
+        hint: game.i18n.localize(
+          "diwako-cpred-additions.settings.dfAmbientLights-enable.hint"
+        ),
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: true,
+      });
 
-Hooks.on("AutomatedAnimations-WorkflowStart", onWorkflowStart);
+      Hooks.on("AutomatedAnimations-WorkflowStart", onWorkflowStart);
+    }
+  }
+}
+
 async function onWorkflowStart(clonedData, animationData) {
-  if (!Utils.isResponsibleGM()) return;
+  if (
+    !Utils.isResponsibleGM() ||
+    !game.settings.get(Constants.MODULE_NAME, "dfAmbientLights-enable")
+  )
+    return;
+  const addedDelay = 100; // web delay
   // console.log({ clonedData, animationData });
 
   if (
@@ -24,10 +50,17 @@ async function onWorkflowStart(clonedData, animationData) {
   let token = clonedData.token;
   if (!token) return;
   let delay = animationData?.primary?.options?.delay || 0;
-  let color =
-    animationData?.primary?.video?.enableCustom || false
-      ? "uuuh i will do that later, maybe"
-      : animationData?.primary?.video?.color || "orange";
+  let soundDelay = animationData?.primary?.sound?.delay || 0;
+  animationData["primary.options.delay"] = delay + addedDelay;
+  animationData["primary.sound.delay"] = soundDelay + addedDelay;
+  let secondaryDelay = animationData?.secondary?.options?.delay || 0;
+  soundDelay = animationData?.secondary?.sound?.delay || 0;
+  animationData["secondary.options.delay"] = secondaryDelay + addedDelay;
+  animationData["secondary.sound.delay"] = soundDelay + addedDelay;
+  // let color =
+  //   animationData?.primary?.video?.enableCustom || false
+  //     ? "uuuh i will do that later, maybe"
+  //     : animationData?.primary?.video?.color || "orange";
   let repeat =
     clonedData?.overrideRepeat || animationData?.primary?.options?.repeat || 1;
   let repeatDelay = animationData?.primary?.options?.repeatDelay || 250;
@@ -43,7 +76,7 @@ async function onWorkflowStart(clonedData, animationData) {
 
   let _addKeyFrame = function (time, on) {
     return {
-      time: game.time.serverTime + time,
+      time: game.time.serverTime + time + addedDelay,
       angle: {
         enabled: false,
         value: 0,
@@ -78,17 +111,18 @@ async function onWorkflowStart(clonedData, animationData) {
   let initFrame = _addKeyFrame(0, false);
   initFrame.time = 0;
   keyFrames.push(initFrame);
-  if (delay > 0) {
-    keyFrames.push(_addKeyFrame(0, false));
-    if (delay > 1) keyFrames.push(_addKeyFrame(delay - 1, false));
-  }
-  let counter = 0;
+  // make 100% sure one millisecond before the first flash is still dark
+  keyFrames.push(_addKeyFrame(delay - 1, false));
+
   for (let index = 0; index < repeat; index++) {
+    // turn light on
     keyFrames.push(_addKeyFrame(delay + repeatDelay * index, true));
+    // keep it on
     keyFrames.push(_addKeyFrame(delay + repeatDelay * index + 49, true));
+    // turn it off
     keyFrames.push(_addKeyFrame(delay + repeatDelay * index + 50, false));
+    // keep it off until new flash
     keyFrames.push(_addKeyFrame(delay + repeatDelay * (index + 1) - 1, false));
-    counter++;
   }
   keyFrames.push(_addKeyFrame(delay + repeatDelay * repeat + 10000, false));
 
@@ -121,7 +155,7 @@ async function onWorkflowStart(clonedData, animationData) {
     function (id) {
       canvas.scene.deleteEmbeddedDocuments("AmbientLight", [id]);
     },
-    delay + repeatDelay * repeat + 2000,
+    delay + repeatDelay * repeat + 2000 + addedDelay,
     light._id
   );
 }
