@@ -112,7 +112,7 @@ Hooks.on("createChatMessage", async function (message) {
   };
 
   let chatMessage = "";
-  let backgroundColor = "var(--cpr-text-chat-failure)";
+  let backgroundColor = "var(--cpr-text-chat-failure, #b90202ff)";
   if (dv >= attackRoll) {
     if (target.document._actor.system.stats.ref.value >= 8) {
       chatMessage = game.i18n.format(
@@ -145,7 +145,7 @@ Hooks.on("createChatMessage", async function (message) {
         .play();
     }
   } else {
-    backgroundColor = "var(--cpr-text-chat-success)";
+    backgroundColor = "var(--cpr-text-chat-success, #2d9f36)";
     if (target.document._actor.system.stats.ref.value >= 8) {
       chatMessage = game.i18n.format(
         "diwako-cpred-additions.message.hit.evade",
