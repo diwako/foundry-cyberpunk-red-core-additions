@@ -44,4 +44,10 @@ export class Utils {
     }
     return dv;
   }
+
+  static isResponsibleGM() {
+    if (!game.user.isGM) return false;
+    let activeGMs = game.users.filter((u) => u.active && u.isGM);
+    return activeGMs.length > 0 && activeGMs[0]._id === game.user._id;
+  }
 }

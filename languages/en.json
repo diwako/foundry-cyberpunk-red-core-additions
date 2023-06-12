@@ -39,6 +39,10 @@
         "name": "Check if poor quality weapons should jam",
         "hint": "Checks each attack roll if a poor quality weapon should jam or break. Do mind that quality of weapons is noted in their weapon name such as (Poor)! This is important for this to work!"
       },
+      "dfAmbientLights-enable": {
+        "name": "Create Lights for muzzle flashes",
+        "hint": "Requires the modules \"DF Active Lights\" and \"Automated Animations\". When Automated Animation plays a ranged attack animation it will simulate a muzzle flash by placing an ambient light source. It will clean the light up on its own."
+      },
       "submit": "Submit",
       "add-sound": "Add sound"
     },

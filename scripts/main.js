@@ -4,6 +4,7 @@ import { Utils } from "./utils.js";
 import { Constants } from "./constants.js";
 import { Cover } from "./cover.js";
 import { PoorWeaponCheck } from "./poorWeaponCheck.js";
+import { DFAmbientLightsAndAA } from "./dfAmbientLights.js";
 
 console.log("diwako-cpred-additions start");
 Hooks.once("init", function () {
@@ -17,6 +18,7 @@ Hooks.once("init", function () {
   Token.prototype.clearDVDisplay = DvDisplay.clear;
 
   Config.registerSettings();
+  DFAmbientLightsAndAA.initialize();
 });
 
 Hooks.on("hoverToken", (token, hovered) => {
