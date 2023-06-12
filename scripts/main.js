@@ -216,29 +216,6 @@ Hooks.on("createChatMessage", async function (message) {
   );
 });
 
-[
-  "preDropItemDetermined",
-  "preTradeItems",
-  "preDropItem",
-  "preTransferItems",
-  "preGiveItem",
-  "preRemoveItems",
-  "preTransferAllItems",
-].forEach((hookname) => {
-  // Hooks.on(
-  //   `item-piles-${hookname}`,
-  //   function (actor, someBoolean1, itemObject, someBoolean2) {
-  //     if (itemObject.item.system.upgrades.length) {
-  //       ui.notifications.error(
-  //         "Dropping/trading/giving upgraded items will break parts of the character sheet. If you want to trade an upgraded item or drop it, tell the GM."
-  //       );
-  //       return false;
-  //     }
-  //     return true;
-  //   }
-  // );
-});
-
 async function handleItemPilesInteraction(source, itemData) {
   // console.log({ source, itemData });
   if (!game.user.isGM) return;
