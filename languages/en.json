@@ -45,7 +45,7 @@
       },
       "itemPilesHandling": {
         "name": "Item Pile Integration",
-        "hint": "Enables special handling for upgraded items while using item piles. Automatically handles the upgrade items, removes or adds them."
+        "hint": "Enables special handling for upgraded items while using item piles. Automatically handles the upgrade items, removes or adds them. There is a delay in upgrade removal, be patient."
       },
       "submit": "Submit",
       "add-sound": "Add sound"

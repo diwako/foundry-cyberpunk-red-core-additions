@@ -40,7 +40,7 @@ async function handleItemPilesInteraction(source, itemData) {
   )
     return;
 
-  console.log({ source, itemData });
+  // console.log({ source, itemData });
 
   if (!Array.isArray(itemData)) {
     itemData = [itemData];
