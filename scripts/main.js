@@ -5,6 +5,7 @@ import { Constants } from "./constants.js";
 import { Cover } from "./cover.js";
 import { PoorWeaponCheck } from "./poorWeaponCheck.js";
 import { DFAmbientLightsAndAA } from "./dfAmbientLights.js";
+import { ItemPiles } from "./itemPiles.js";
 
 console.log("diwako-cpred-additions start");
 Hooks.once("init", function () {
@@ -19,6 +20,7 @@ Hooks.once("init", function () {
 
   Config.registerSettings();
   DFAmbientLightsAndAA.initialize();
+  ItemPiles.initialize();
 });
 
 Hooks.on("hoverToken", (token, hovered) => {
@@ -213,29 +215,6 @@ Hooks.on("createChatMessage", async function (message) {
       whisper: message.whisper,
     },
     { chatBubble: false }
-  );
-});
-
-[
-  "preDropItemDetermined",
-  "preTradeItems",
-  "preDropItem",
-  "preTransferItems",
-  "preGiveItem",
-  "preRemoveItems",
-  "preTransferAllItems",
-].forEach((hookname) => {
-  Hooks.on(
-    `item-piles-${hookname}`,
-    function (actor, someBoolean1, itemObject, someBoolean2) {
-      if (itemObject.item.system.upgrades.length) {
-        ui.notifications.error(
-          "Dropping/trading/giving upgraded items will break parts of the character sheet. If you want to trade an upgraded item or drop it, tell the GM."
-        );
-        return false;
-      }
-      return true;
-    }
   );
 });
 

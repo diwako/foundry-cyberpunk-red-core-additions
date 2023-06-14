@@ -29,7 +29,7 @@
         "id": "cyberpunk-red-core",
         "type": "system",
         "compatibility": {
-          "minimum": "0.87.0"
+          "minimum": "0.86.0"
         }
       }
     ],
@@ -41,6 +41,7 @@
       }
     ]
   },
+  "styles": ["./css/cpred-additions.css"],
   "packs": [
     {
       "label": "CPR Additions: Macros",

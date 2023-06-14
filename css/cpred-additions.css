@@ -1,0 +1,43 @@
+/* Item piles fixes */
+.item-piles-even-color:nth-child(even) {
+  background-color: var(
+    --cpr-background-row-even,
+    --item-piles-even-color
+  ) !important;
+}
+.item-piles-even-color:nth-child(odd) {
+  background-color: var(
+    --cpr-background-row-odd,
+    --item-piles-odd-color
+  ) !important;
+}
+/* .item-piles-item-row.svelte-1o95obs */
+.item-piles-child-even-color > * {
+  background-color: var(
+    --cpr-background-row-even,
+    --item-piles-even-color
+  ) !important;
+}
+/* .item-piles-item-row.svelte-1o95obs */
+.item-piles-child-odd-color > * {
+  background-color: var(
+    --cpr-background-row-odd,
+    --item-piles-odd-color
+  ) !important;
+}
+.item.active.underscore {
+  border-bottom-color: var(
+    --cpr-background-border,
+    rgba(125, 0, 0, 0.5)
+  ) !important;
+}
+.item-piles-config-container p {
+  color: var(--cpr-text-normal, --color-text-dark-secondary) !important;
+}
+.item-piles-disabled {
+  background-color: var(
+    /* --cpr-background-tab-inactive, */
+    --cpr-text-icon-dimmed,
+    --item-piles-minor-inactive
+  ) !important;
+}
