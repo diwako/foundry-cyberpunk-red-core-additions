@@ -231,6 +231,7 @@ async function handleItemPilesInteraction(source, itemData) {
   for (const itemInfo of itemData) {
     // only process weapon item types with upgrades
     if (
+      !itemInfo ||
       itemInfo?.quantity > 1 ||
       !itemInfo.item ||
       !itemInfo.item.type ||
