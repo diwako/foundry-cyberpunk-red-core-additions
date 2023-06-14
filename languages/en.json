@@ -43,6 +43,10 @@
         "name": "Create Lights for muzzle flashes",
         "hint": "Requires the modules \"DF Active Lights\" and \"Automated Animations\". When Automated Animation plays a ranged attack animation it will simulate a muzzle flash by placing an ambient light source. It will clean the light up on its own."
       },
+      "itemPilesHandling": {
+        "name": "Item Pile Integration",
+        "hint": "Enables special handling for upgraded items while using item piles. Automatically handles the upgrade items, removes or adds them."
+      },
       "submit": "Submit",
       "add-sound": "Add sound"
     },

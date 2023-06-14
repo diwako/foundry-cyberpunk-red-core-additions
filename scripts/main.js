@@ -5,6 +5,7 @@ import { Constants } from "./constants.js";
 import { Cover } from "./cover.js";
 import { PoorWeaponCheck } from "./poorWeaponCheck.js";
 import { DFAmbientLightsAndAA } from "./dfAmbientLights.js";
+import { ItemPiles } from "./itemPiles.js";
 
 console.log("diwako-cpred-additions start");
 Hooks.once("init", function () {
@@ -19,6 +20,7 @@ Hooks.once("init", function () {
 
   Config.registerSettings();
   DFAmbientLightsAndAA.initialize();
+  ItemPiles.initialize();
 });
 
 Hooks.on("hoverToken", (token, hovered) => {
@@ -214,73 +216,6 @@ Hooks.on("createChatMessage", async function (message) {
     },
     { chatBubble: false }
   );
-});
-
-async function handleItemPilesInteraction(source, itemData) {
-  // console.log({ source, itemData });
-  if (!game.user.isGM) return;
-  if (!Array.isArray(itemData)) {
-    itemData = [itemData];
-  }
-  if (source._actor) {
-    source = source._actor;
-  }
-
-  // if (!(await source.testUserPermission(game.user, "OWNER"))) return;
-  const itemsToDelete = [];
-  for (const itemInfo of itemData) {
-    // only process weapon item types with upgrades
-    if (
-      !itemInfo ||
-      itemInfo?.quantity > 1 ||
-      !itemInfo.item ||
-      !itemInfo.item.type ||
-      itemInfo.item.type != "weapon" ||
-      !itemInfo.item.system.upgrades ||
-      !itemInfo.item.system.upgrades.length
-    )
-      continue;
-
-    for (const upgrade of itemInfo.item.system.upgrades) {
-      itemsToDelete.push(upgrade._id);
-    }
-  }
-
-  if (itemsToDelete.length) {
-    setTimeout(
-      async function (source, itemsToDelete) {
-        // if (!(await source.testUserPermission(game.user, "OWNER"))) return;
-        const actualDelete = [];
-        for (const id of itemsToDelete) {
-          const item = await source.items.get(id);
-          if (item) actualDelete.push(id);
-        }
-
-        if (actualDelete.length) {
-          await source.deleteEmbeddedDocuments("Item", actualDelete);
-          if (
-            source.items.size == 0 &&
-            source?.flags["item-piles"]?.data?.deleteWhenEmpty &&
-            source.parent
-          )
-            await source.parent.delete();
-        }
-      },
-      5 * 1000,
-      source,
-      itemsToDelete
-    );
-  }
-}
-
-Hooks.on("item-piles-removeItems", function (target, itemDeltas) {
-  handleItemPilesInteraction(target, itemDeltas);
-});
-
-["dropItem", "transferItems", "giveItem"].forEach((hookname) => {
-  Hooks.on(`item-piles-${hookname}`, async function (source, _, itemData) {
-    handleItemPilesInteraction(source, itemData);
-  });
 });
 
 const api = {};
