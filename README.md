@@ -60,9 +60,18 @@ The feature can be turned off by the GM, it is default enabled.
 
 [Items Piles](https://github.com/fantasycalendar/FoundryVTT-ItemPiles/) is great, I fully recommend that module, sadly it can break character sheets if you drop, store, or sell an upgraded item using an Item Piles functionality.
 
-Thus if this module detects you dropping an upgraded item it will prevent the action.
+With this, special handling of these upgraded items is added. The module will automatically delete the remnant upgrade items, even delete an item pile when an upgraded weapon was picked up and a remnant upgrade item was left behind. \
+However due to synchronization, there is a delay, so be patient when you see an upgrade item linger.\
+This can be disabled inside the module settings.
 
 If you do not run Item Piles, don't worry this module will do nothing then.
+
+### DF Active Lights + Automated Animations support
+
+![DF Lights example](images/dfLights.gif)
+
+When the modules [Automated Animations](https://github.com/otigon/automated-jb2a-animations) and [DF Active Lights](https://foundryvtt.com/packages/df-active-lights) are active, the module will listen to events by Automated Animations and simulate the light a muzzle flash would create. Will only work for ranged weapons. Semi and auto fire are supported. \
+Can be disabled in the module's setting if a GM does not want this feature.
 
 ## Known Issues
 
