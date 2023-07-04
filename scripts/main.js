@@ -54,7 +54,7 @@ Hooks.on("createChatMessage", async function (message) {
   // console.log(message);
   const attackType = DIV.querySelector(
     "div.rollcard-subtitle-center.text-small"
-  ).innerHTML;
+  ).innerHTML.trim();
   if (attackType == `${game.i18n.localize("CPR.rolls.suppressiveFire")}`)
     return;
 
