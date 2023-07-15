@@ -1,0 +1,95 @@
+{
+  "diwako-cpred-additions": {
+    "settings": {
+      "hit-animations": {
+        "name": "ヒットとミスのアニメーションを表示",
+        "hint": "Sequencer モジュールと JB2A animations モジュールが必要です。ヒットとミスのアニメーションを有効にします。Sequencer モジュールと JB2A patreon モジュールが有効になっていない場合は無効にしてください。"
+      },
+      "hit-sounds": {
+        "name": "ヒット時のサウンドを再生",
+        "hint": "Sequencer モジュールが必要です。遠隔攻撃がヒットした時のサウンドを再生します。"
+      },
+      "sound-select": {
+        "name": "ヒット時のサウンドを選択",
+        "hint": "ターゲットにヒットした時のサウンドを選択してください。"
+      },
+      "dv-display-show": {
+        "name": "マウスホバー時に難易度を表示",
+        "hint": "トークンをマウスホバーした時に、装備している遠隔武器での攻撃難易度を表示します。攻撃元のトークンを選択し、対象のトークンにマウスカーソルを合わせてください。"
+      },
+      "dv-display-combat-only": {
+        "name": "戦闘中のみ難易度を表示",
+        "hint": "戦闘がアクティブな場合にのみマウスホバーで難易度を表示します。"
+      },
+      "dv-display-position": {
+        "name": "難易度の表示位置",
+        "hint": "マウスホバー時の難易度表示位置を選択します。",
+        "left": "トークンの左",
+        "right": "トークンの右"
+      },
+      "dv-display-show-weapon-name": {
+        "name": "難易度表示に武器名も表示",
+        "hint": "有効にすると難易度表示で武器名を使用します。 無効にすると武器のタイプを使用します。"
+      },
+      "cover-token-hide-on-place": {
+        "name": "遮蔽トークンを非表示",
+        "hint": "マクロを使用して作成した遮蔽トークンの初期設定をプレイヤーから非表示にします。 GMには表示されます。"
+      },
+      "poor-weapon-check": {
+        "name": "低品質の武器の動作不良チェック",
+        "hint": "低品質の武器が弾詰まりを起こしたりは壊れたりする可かどうかを攻撃ロールの際にチェックします。 武器名に (低品質) などが追加されている必要があります。"
+      },
+      "dfAmbientLights-enable": {
+        "name": "マズルフラッシュアニメーションを表示",
+        "hint": "\"DF Active Lights\" モジュールと \"Automated Animations\" モジュールが必要です。Automated Animations モジュールで光源を周囲に配置することでマズルフラッシュを表現します。 光源は自動的に削除されます。"
+      },
+      "itemPilesHandling": {
+        "name": "Item Piles 連携",
+        "hint": "Item Piles モジュールと連携してアイテム関連の拡張機能を有効にします。 アイテムを自動的に処理、削除、追加します。 削除には時間がかかることがあります。"
+      },
+      "submit": "適用",
+      "add-sound": "サウンドを追加"
+    },
+    "message": {
+      "missed": {
+        "normal": "<b>{attacker}の{target}への攻撃は<span class=\"fg-red\">ミス！</span></b>(難易度:{dv}), {dv-diff+1}足りない！)",
+        "evade": "<b>{attacker}の{target}への攻撃は難易度に <span class=\"fg-red\">届かない！</span></b>(難易度:{dv}), {dv-diff+1}足りない！)<b>だが相手の回避を上回っているならダメージロールだ！</b>"
+      },
+      "hit": {
+        "normal": "<b>{attacker}の{target}への攻撃は<span class=\"fg-green\">ヒット！</span></b>(難易度:{dv}, {dv-diff}オーバー！)<b>ダメージロールだ！</b>",
+        "evade": "<b>{attacker}の{target}への攻撃は難易度を<span class=\"fg-green\">越えた！</span></b>(難易度:{dv}, {dv-diff}オーバー！)<b>相手が回避していないならダメージロールだ！</b>"
+      }
+    },
+    "dv-display": {
+      "dv-text": "難易度:{dv-value} {weapon-name}\n"
+    },
+    "cover": {
+      "dialog": {
+        "title": "遮蔽トークンを作成",
+        "description": "材質に準じたHPの遮蔽トークンを生成します。 プリセットから選択するか、組み合わせて作成してください。高さと幅の値はグリッドが単位です。",
+        "preset": "プリセット",
+        "material": "材質"
+      },
+      "materials": {
+        "display": "{material} ({thickness})",
+        "thin": "薄い遮蔽",
+        "thick": "厚い遮蔽",
+        "steel": "鋼鉄",
+        "stone": "石",
+        "bulletproofglass": "防弾ガラス",
+        "concrete": "コンクリート",
+        "wood": "木",
+        "plaster-foam-plastic": "石膏／発泡樹脂／プラスチック"
+      },
+      "only-gm": "GMのみの機能",
+      "default-actor-name": "遮蔽物",
+      "created-actor": "遮蔽トークン用のデフォルトアクターを作成: \"{actor-name}\"",
+      "zero-hp-no-cover": "HPが0の場合は遮蔽として機能しませんが、視線を遮る障害物として使用される可能性があります。"
+    },
+    "poor-weapon-check": {
+      "word-indicator": "(低品質)",
+      "ranged-weapon": "\"{weapon}\"はこの攻撃で<b><span class=\"fg-red\">弾詰まりが起こった！</span></b>",
+      "melee-weapon": "\"{weapon}\"はこの攻撃で<b><span class=\"fg-red\">壊れた！</span></b>もう使用できない。"
+    }
+  }
+}
