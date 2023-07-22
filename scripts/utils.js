@@ -12,19 +12,28 @@ export class Utils {
   static async getDV(dvTable, dist) {
     let cachedData = DV_CACHE.get(dvTable);
     if (!cachedData) {
-      let pack = game.packs.get("cyberpunk-red-core.dv-tables");
-      if (!pack) {
-        // fallback for older version
-        pack = game.packs.get("cyberpunk-red-core.dvTables");
-      }
-      const tableId = pack.index.getName(dvTable)?._id;
-      if (!tableId) {
-        console.log(
-          `diwako-cpred-additions ===== No compendium table found => ${dvTable}`
+      // try to get imported table first
+      let table = await game.tables.getName(dvTable);
+      if (!table) {
+        // after that try to get it from the default compendium packs
+        const compendium = game.settings.get(
+          game.system.id,
+          "dvRollTableCompendium"
         );
-        return -1;
+        const pack =
+          game.packs.get(compendium) || // what is configured in the system
+          game.packs.get("cyberpunk-red-core.dv-tables") || // 0.87.X and up
+          game.packs.get("cyberpunk-red-core.dvTables"); // 0.86.X and below
+
+        const tableId = pack.index.getName(dvTable)?._id;
+        if (!tableId) {
+          console.log(
+            `diwako-cpred-additions ===== No compendium (${pack.metadata.id} | ${pack.metadata.label}) table found => ${dvTable}`
+          );
+          return -1;
+        }
+        table = await pack.getDocument(tableId);
       }
-      const table = await pack.getDocument(tableId);
       console.log(`diwako-cpred-additions ===== Caching table ${dvTable}`);
       cachedData = { table, dvs: new Map() };
       DV_CACHE.set(dvTable, cachedData);

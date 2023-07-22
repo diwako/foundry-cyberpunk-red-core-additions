@@ -77,6 +77,6 @@ Can be disabled in the module's setting if a GM does not want this feature.
 
 The CPRED - Core system does not provide speaker data on chat messages for players. The module will try to get the attacker token through various ways, but if the token you are attacking with has a different name than your character AND prototype token, this will not work. For the GM it will work just fine, as required data is being sent.
 
-Only DV tables from the system's compendium are used. Custom ones are currently not supported.
+Custom DV tables are supported. It will first use imported rolltables of matching names, then try to get rolltables from the set DV compendium of the system. These values will be cached, when making changes to them you will need to reload your browser window.
 
 DV Display and "Does it hit" can only work if a weapon has a DV table configured.
