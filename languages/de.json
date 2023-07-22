@@ -1,0 +1,95 @@
+{
+  "diwako-cpred-additions": {
+    "settings": {
+      "hit-animations": {
+        "name": "Show hit or miss animations",
+        "hint": "Requires Sequencer and JB2A animations! Enable or disable hit or miss animations. Disable if you do not have the JB2A patreon module or Sequencer loaded!"
+      },
+      "hit-sounds": {
+        "name": "Play sounds on hit",
+        "hint": "Requires Sequencer! Play sounds when target is hit by a ranged attack"
+      },
+      "sound-select": {
+        "name": "Select hit sounds",
+        "hint": "Select the sounds you want to be played when a token lands a hit on another"
+      },
+      "dv-display-show": {
+        "name": "Show DV Display on token hover",
+        "hint": "Shows the DV of all equipped ranged weapons when hovering over another token. Have the token selected you want as source and hover over the token you want to hit"
+      },
+      "dv-display-combat-only": {
+        "name": "Show DV Display only during combat",
+        "hint": "The DV Display is only shown on hover if there is current an active combat encounter"
+      },
+      "dv-display-position": {
+        "name": "Position of the DV Display at the token",
+        "hint": "Sets the position where the DV Display should be shown right next to the hovered token",
+        "left": "Left",
+        "right": "Right"
+      },
+      "dv-display-show-weapon-name": {
+        "name": "Show weapon names in the DV Display",
+        "hint": "The DV Display uses the weapon names when setting is enabled. It will use the weapon types when disabled"
+      },
+      "cover-token-hide-on-place": {
+        "name": "Hide cover token on place",
+        "hint": "Hides the the cover token when created through the macro. GMs will be able to see it, but players will not."
+      },
+      "poor-weapon-check": {
+        "name": "Check if poor quality weapons should jam",
+        "hint": "Checks each attack roll if a poor quality weapon should jam or break. Do mind that quality of weapons is noted in their weapon name such as (Poor)! This is important for this to work!"
+      },
+      "dfAmbientLights-enable": {
+        "name": "Create Lights for muzzle flashes",
+        "hint": "Requires the modules \"DF Active Lights\" and \"Automated Animations\". When Automated Animation plays a ranged attack animation it will simulate a muzzle flash by placing an ambient light source. It will clean the light up on its own."
+      },
+      "itemPilesHandling": {
+        "name": "Item Pile Integration",
+        "hint": "Enables special handling for upgraded items while using item piles. Automatically handles the upgrade items, removes or adds them. There is a delay in upgrade removal, be patient."
+      },
+      "submit": "Submit",
+      "add-sound": "Add sound"
+    },
+    "message": {
+      "missed": {
+        "normal": "<b>{attacker} <span class=\"fg-red\">verfehlt</span> {target}</b> um {dv-diff+1} (SG: {dv})!",
+        "evade": "<b>{attacker} <span class=\"fg-red\">verfehlt</span> {target}</b> um {dv-diff+1} nach Fernkampf-SG ({dv})! Schaden würfeln, wenn das Ziel auszuweichen versucht UND dieser Wurf den Ausweichen-Wurf übertrifft!"
+      },
+      "hit": {
+        "normal": "<b>{attacker} <span class=\"fg-green\">trifft</span> {target}</b> (SG: {dv}, {dv-diff} drüber)! Schaden wrfeln!",
+        "evade": "<b>{attacker} <span class=\"fg-green\">übertrifft den Fernkampf-SG</span> </b>({dv}, {dv-diff} drüber)<b> und trifft {target}</b> um {dv-diff-1}! Schaden würfeln, wenn das Ziel nicht auszuweichen versucht ODER der Wurf den Ausweichen-Wurf übertrifft"
+      }
+    },
+    "dv-display": {
+      "dv-text": "SG: {dv-value} {weapon-name}\n"
+    },
+    "cover": {
+      "dialog": {
+        "title": "Neue Deckungsspielfigur",
+        "description": "Erstellt eine Spielfigur für die Deckung mit TP basierend auf dem Material. Aus den Voreinstellungen wählen oder frei zusammenstellen.\nHöhe und Breite sind in <b>Gitter-Größeneinheiten</b>!",
+        "preset": "Voreinstellung",
+        "material": "Material"
+      },
+      "materials": {
+        "display": "{material} ({thickness})",
+        "thin": "dünn",
+        "thick": "dick",
+        "steel": "Stahl",
+        "stone": "Stein",
+        "bulletproofglass": "Panzerglas",
+        "concrete": "Beton",
+        "wood": "Holz",
+        "plaster-foam-plastic": "Putz/Schaumstoff/Plastik"
+      },
+      "only-gm": "Diese Funktion steht nur der SL zur Verfügung!",
+      "default-actor-name": "Deckungshilfe",
+      "created-actor": "Standardakteur für Deckung erstellt: \"{actor-name}\"",
+      "zero-hp-no-cover": "Alles mit 0 TP gilt nicht als Deckung, kann aber zum Verbergen genutzt werden!"
+    },
+    "poor-weapon-check": {
+      "word-indicator": "(Schlechte Qualität)",
+      "ranged-weapon": "Beim Angriff mit der Fernkampfwaffe \"{weapon}\" hat diese eine <b><span class=\"fg-red\">Ladehemmung</span></b>!",
+      "melee-weapon": "Beim Angriff mit der Nahkampfwaffe \"{weapon}\" geht diese <b><span class=\"fg-red\">kaputt</span></b> und ist <b>nicht mehr verwendbar</b>!"
+    }
+  }
+}
