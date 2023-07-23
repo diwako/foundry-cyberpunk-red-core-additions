@@ -37,7 +37,8 @@ async function onWorkflowStart(clonedData, animationData) {
   if (
     !clonedData?.item?.system?.isRanged ||
     !clonedData?.ammoItem ||
-    !clonedData?.token
+    !clonedData?.token ||
+    !animationData
   )
     return;
 
