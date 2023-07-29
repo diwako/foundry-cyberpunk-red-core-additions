@@ -117,8 +117,9 @@ Hooks.on("createChatMessage", async function (message) {
 
   let chatMessage = "";
   let backgroundColor = "var(--cpr-text-chat-failure, #b90202ff)";
+  let targetActor = target.document?._actor || target.document?.actor;
   if (dv >= attackRoll) {
-    if (target.document._actor.system.stats.ref.value >= 8) {
+    if (targetActor.system.stats.ref.value >= 8) {
       chatMessage = game.i18n.format(
         "diwako-cpred-additions.message.missed.evade",
         messageReplaceMap
@@ -150,7 +151,7 @@ Hooks.on("createChatMessage", async function (message) {
     }
   } else {
     backgroundColor = "var(--cpr-text-chat-success, #2d9f36)";
-    if (target.document._actor.system.stats.ref.value >= 8) {
+    if (targetActor.system.stats.ref.value >= 8) {
       chatMessage = game.i18n.format(
         "diwako-cpred-additions.message.hit.evade",
         messageReplaceMap
