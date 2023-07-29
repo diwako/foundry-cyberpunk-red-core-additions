@@ -52,6 +52,13 @@
     ]
   },
   "styles": ["./css/cpred-additions.css"],
+  "packFolders": [
+    {
+      "name": "CPR Additions",
+      "sorting": "m",
+      "packs": ["cpr-additions-macros"]
+    }
+  ],
   "packs": [
     {
       "label": "CPR Additions: Macros",

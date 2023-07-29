@@ -142,7 +142,10 @@ async function extractData(html) {
     position = [location.x, location.y];
   } else {
     const { x, y } =
-      canvas.app.renderer.plugins.interaction.mouse.getLocalPosition(
+      canvas.app.renderer.plugins.interaction?.mouse?.getLocalPosition(
+        canvas.app.stage
+      ) ||
+      canvas.app?.renderer.plugins.interaction?.pointer?.getLocalPosition(
         canvas.app.stage
       );
     position = [x, y];
