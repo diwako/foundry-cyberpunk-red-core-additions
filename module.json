@@ -70,7 +70,8 @@
   ],
   "compatibility": {
     "minimum": "10",
-    "verified": "10"
+    "verified": "10.303",
+    "maximum": "11"
   },
   "url": "https://github.com/diwako/foundry-cyberpunk-red-core-additions",
   "manifest": "https://github.com/diwako/foundry-cyberpunk-red-core-additions/releases/latest/download/module.json",
