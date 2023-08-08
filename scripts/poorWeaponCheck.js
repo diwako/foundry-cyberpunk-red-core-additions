@@ -46,7 +46,7 @@ Hooks.on("createChatMessage", async function (message) {
     itemName.includes(
       game.i18n.localize(
         "diwako-cpred-additions.poor-weapon-check.word-indicator"
-      )
+      ).toLowerCase()
     );
   if (!isPoorWeapon) return;
 
