@@ -87,7 +87,7 @@
       "zero-hp-no-cover": "Alles mit 0 TP gilt nicht als Deckung, kann aber zum Verbergen genutzt werden!"
     },
     "poor-weapon-check": {
-      "word-indicator": "(Schlechte Qualität)",
+      "word-indicator": "(schlechte qualität)",
       "ranged-weapon": "Beim Angriff mit der Fernkampfwaffe \"{weapon}\" hat diese eine <b><span class=\"fg-red\">Ladehemmung</span></b>!",
       "melee-weapon": "Beim Angriff mit der Nahkampfwaffe \"{weapon}\" geht diese <b><span class=\"fg-red\">kaputt</span></b> und ist <b>nicht mehr verwendbar</b>!"
     }
