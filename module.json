@@ -39,7 +39,7 @@
         "id": "cyberpunk-red-core",
         "type": "system",
         "compatibility": {
-          "minimum": "0.86.0"
+          "minimum": "0.87.0"
         }
       }
     ],
@@ -52,18 +52,27 @@
     ]
   },
   "styles": ["./css/cpred-additions.css"],
+  "packFolders": [
+    {
+      "name": "CPR Additions",
+      "sorting": "m",
+      "packs": ["cpr-additions-macros"]
+    }
+  ],
   "packs": [
     {
       "label": "CPR Additions: Macros",
       "name": "cpr-additions-macros",
       "path": "./packs/cpr-additions-macros.db",
       "system": "cyberpunk-red-core",
-      "type": "Macro"
+      "type": "Macro",
+      "banner": "systems/cyberpunk-red-core/images/compendium-banner.webp"
     }
   ],
   "compatibility": {
     "minimum": "10",
-    "verified": "10"
+    "verified": "11",
+    "maximum": "11"
   },
   "url": "https://github.com/diwako/foundry-cyberpunk-red-core-additions",
   "manifest": "https://github.com/diwako/foundry-cyberpunk-red-core-additions/releases/latest/download/module.json",

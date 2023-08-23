@@ -7,4 +7,6 @@
 *.db   text eol=lf
 *.css  text eol=lf
 
+*.ldb  binary
 *.png  binary
+MANIFEST-00* binary
