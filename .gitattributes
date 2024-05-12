@@ -1,3 +1,4 @@
+.gitattributes text eol=lf
 *.html text eol=lf
 *.js   text eol=lf
 *.json text eol=lf
@@ -10,3 +11,8 @@
 *.ldb  binary
 *.png  binary
 MANIFEST-00* binary
+packs/cpr-additions-macros/CURRENT text eol=lf
+packs/cpr-additions-macros/LOCK text eol=lf
+packs/cpr-additions-macros/LOG text eol=lf
+packs/cpr-additions-macros/LOG.old text eol=lf
+packs/cpr-additions-macros/*.log text eol=lf
