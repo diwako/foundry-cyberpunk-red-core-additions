@@ -125,33 +125,56 @@ async function extractData(html) {
     name = material.options[material.options.selectedIndex].text;
   }
 
-  let position = [0, 0];
-  if (window.warpgate) {
-    let location = await warpgate.crosshairs.show({
-      size: 1,
-      icon: "systems/cyberpunk-red-core/icons/compendium/armor/bullet_proof_shield.svg",
-      label: name,
-      drawIcon: true,
-      drawOutline: false,
-      interval: 2,
-    });
+  let position = await getPosition(height, width);
+  createToken(name, height, width, position, hp);
+}
 
-    if (location.cancelled) {
+async function getPosition(height, width) {
+  let position;
+  if (window.Portal) {
+    let location = await new Portal()
+      .texture(
+        "systems/cyberpunk-red-core/icons/compendium/armor/bullet_proof_shield.svg"
+      )
+      .size(Math.max(height, width) * 2)
+      .pick();
+
+    if (!location) {
       return;
     }
-    position = [location.x, location.y];
-  } else {
-    const { x, y } =
-      canvas.app.renderer.plugins.interaction?.mouse?.getLocalPosition(
-        canvas.app.stage
-      ) ||
-      canvas.app?.renderer.plugins.interaction?.pointer?.getLocalPosition(
-        canvas.app.stage
-      );
-    position = [x, y];
-  }
 
-  createToken(name, height, width, position, hp);
+    position = location;
+  } else {
+    if (window.warpgate) {
+      let location = await warpgate.crosshairs.show({
+        size: 1,
+        icon: "systems/cyberpunk-red-core/icons/compendium/armor/bullet_proof_shield.svg",
+        label: name,
+        drawIcon: true,
+        drawOutline: false,
+        interval: 2,
+      });
+
+      if (location.cancelled) {
+        return;
+      }
+      position = {
+        x: location.x,
+        y: location.y,
+        elevation: location.elevation || 0,
+      };
+    } else {
+      const { x, y } =
+        canvas.app.renderer.plugins.interaction?.mouse?.getLocalPosition(
+          canvas.app.stage
+        ) ||
+        canvas.app?.renderer.plugins.interaction?.pointer?.getLocalPosition(
+          canvas.app.stage
+        );
+      position = { x: x, y: y, elevation: 0 };
+    }
+  }
+  return position;
 }
 
 async function getActor() {
@@ -196,6 +219,7 @@ async function createActor() {
       displayName: 30,
       disposition: 0,
       flags: flags,
+      img: "systems/cyberpunk-red-core/icons/compendium/armor/bullet_proof_shield.svg",
     },
   });
 
@@ -228,8 +252,9 @@ async function createToken(name, height, width, position, hp) {
     width: width,
     hidden: game.settings.get(Constants.MODULE_NAME, "hideCoverTokenOnPlace"),
     name: name,
-    x: position[0] - canvas.grid.size * (width / 2),
-    y: position[1] - canvas.grid.size * (height / 2),
+    x: position.x - canvas.grid.size * (width / 2),
+    y: position.y - canvas.grid.size * (height / 2),
+    elevation: position.elevation,
     ["actorData.system.derivedStats.hp.max"]: hp,
     ["actorData.system.derivedStats.hp.value"]: hp,
     ["texture.scaleX"]: 1,
