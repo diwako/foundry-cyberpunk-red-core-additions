@@ -209,6 +209,9 @@ async function createActor() {
     hideHealthEstimate: true,
     hideName: false,
   };
+  flags.splatter = {
+    bloodColor: "#000000",
+  };
 
   await actor.update({
     prototypeToken: {
