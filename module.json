@@ -58,6 +58,38 @@
         "type": "module",
         "compatibility": {}
       }
+    ],
+    "recommends": [
+      {
+        "id": "autoanimations",
+        "type": "module",
+        "compatibility": {}
+      },
+      {
+        "id": "df-active-lights",
+        "type": "module",
+        "compatibility": {}
+      },
+      {
+        "id": "item-piles",
+        "type": "module",
+        "compatibility": {}
+      },
+      {
+        "id": "JB2A_DnD5e",
+        "type": "module",
+        "compatibility": {}
+      },
+      {
+        "id": "portal-lib",
+        "type": "module",
+        "compatibility": {}
+      },
+      {
+        "id": "sequencer",
+        "type": "module",
+        "compatibility": {}
+      }
     ]
   },
   "styles": [
