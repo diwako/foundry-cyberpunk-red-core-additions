@@ -134,12 +134,14 @@ Hooks.on("createChatMessage", async function (message) {
       window.Sequence &&
       game.settings.get(Constants.MODULE_NAME, "hit-animations")
     ) {
+      const filePath = game.settings.get(Constants.MODULE_NAME, "jb2a-patreon")
+        ? "modules/jb2a_patreon/Library/Generic/UI/Miss_01_Red_200x200.webm"
+        : "modules/JB2A_DnD5e/Library/Generic/UI/Miss_02_White_200x200.webm";
+
       new Sequence()
         .effect()
         .delay(1000)
-        .file(
-          "modules/jb2a_patreon/Library/Generic/UI/Miss_01_Red_200x200.webm"
-        )
+        .file(filePath)
         .snapToGrid()
         .atLocation(token, {
           gridUnits: true,
@@ -183,6 +185,9 @@ Hooks.on("createChatMessage", async function (message) {
       }
       // blood effect
       if (game.settings.get(Constants.MODULE_NAME, "hit-animations")) {
+        const filePath = game.settings.get(Constants.MODULE_NAME, "jb2a-patreon")
+          ? "modules/jb2a_patreon/Library/Generic/Weapon_Attacks/Melee/DmgBludgeoning_01_Regular_Yellow_2Handed_800x600.webm"
+          : "modules/JB2A_DnD5e/Library/Generic/Creature/Fist/CreatureAttackFist_002_004_Blue_800x600.webm";
         let angle =
           (360 +
             Math.atan2(target.y - token.y, target.x - token.x) *
@@ -191,9 +196,7 @@ Hooks.on("createChatMessage", async function (message) {
         sequence
           .effect()
           .delay(250)
-          .file(
-            "modules/jb2a_patreon/Library/Generic/Weapon_Attacks/Melee/DmgBludgeoning_01_Regular_Yellow_2Handed_800x600.webm"
-          )
+          .file(filePath)
           .atLocation(target, {
             offset: {
               x: -Math.cos((angle * Math.PI) / 180),

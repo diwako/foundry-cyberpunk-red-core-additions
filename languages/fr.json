@@ -5,6 +5,10 @@
         "name": "Afficher les animations de tir",
         "hint": "Nécéssite Sequencer and JB2A animations! Active ou désactive les animations de tirs. Désactivez si vous n'avez pas JB2A patreon module ou Sequencer activés!"
       },
+      "jb2a-patreon": {
+        "name": "Use JB2A Patreon assets",
+        "hint": "Enable if you do have the JB2A patreon module. Disable if you do not."
+      },
       "hit-sounds": {
         "name": "Jouer un son au Tir",
         "hint": "Nécéssite Sequencer! Jouer un son quand une cible est touchée par un tir"
