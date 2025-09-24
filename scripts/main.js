@@ -39,7 +39,7 @@ Hooks.on("controlToken", (token, _) => {
 // Check if an attack hits or not
 // Huge thanks to Zhell from the foundry discord for all the help
 Hooks.on("createChatMessage", async function (message) {
-  if (game.userId != message._source.user) return;
+  if (game.userId != message._source.author) return;
   const DIV = document.createElement("DIV");
   DIV.innerHTML = message.content;
   const isAttack = DIV.querySelector(
@@ -58,7 +58,7 @@ Hooks.on("createChatMessage", async function (message) {
   if (attackType == `${game.i18n.localize("CPR.rolls.suppressiveFire")}`)
     return;
 
-  const target = message.user.targets.first();
+  const target = message.author.targets.first();
   if (!target) {
     console.log(`diwako-cpred-additions ===== No target was selected!`);
     return;

@@ -2,9 +2,7 @@ const DV_CACHE = new Map();
 export class Utils {
   static getDistance(token, target) {
     if (token.document) token = token.document;
-    const a = canvas.grid.measureDistance(token, target, {
-      gridSpaces: true,
-    });
+    const a = canvas.grid.measurePath([token, target]).cost; // this could also be `distance`, but I don't know the difference yet.
     const b = token.elevation - target.document.elevation;
     return Math.round(Math.sqrt(a * a + b * b));
   }
