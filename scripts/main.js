@@ -187,7 +187,7 @@ Hooks.on("createChatMessage", async function (message) {
       if (game.settings.get(Constants.MODULE_NAME, "hit-animations")) {
         const filePath = game.settings.get(Constants.MODULE_NAME, "jb2a-patreon")
           ? "modules/jb2a_patreon/Library/Generic/Weapon_Attacks/Melee/DmgBludgeoning_01_Regular_Yellow_2Handed_800x600.webm"
-          : "modules/JB2A_DnD5e/Library/Generic/Creature/Fist/CreatureAttackFist_002_004_Blue_800x600.webm";
+          : "modules/JB2A_DnD5e/Library/Generic/Impact/Impact_07_Regular_Orange_400x400.webm";
         let angle =
           (360 +
             Math.atan2(target.y - token.y, target.x - token.x) *
