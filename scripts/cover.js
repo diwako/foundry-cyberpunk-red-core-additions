@@ -258,8 +258,8 @@ async function createToken(name, height, width, position, hp) {
     x: position.x - canvas.grid.size * (width / 2),
     y: position.y - canvas.grid.size * (height / 2),
     elevation: position.elevation,
-    ["actorData.system.derivedStats.hp.max"]: hp,
-    ["actorData.system.derivedStats.hp.value"]: hp,
+    ["actor.system.derivedStats.hp.max"]: hp,
+    ["actor.system.derivedStats.hp.value"]: hp,
     ["texture.scaleX"]: 1,
     ["texture.scaleY"]: height / width,
   };
