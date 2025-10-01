@@ -20,8 +20,8 @@ export class Utils {
         );
         const pack =
           game.packs.get(compendium) || // what is configured in the system
-          game.packs.get("cyberpunk-red-core.dv-tables") || // 0.87.X and up
-          game.packs.get("cyberpunk-red-core.dvTables"); // 0.86.X and below
+          game.packs.get(`${game.system.id}.dv-tables`) || // 0.87.X and up
+          game.packs.get(`${game.system.id}.dvTables`); // 0.86.X and below
 
         const tableId = pack.index.getName(dvTable)?._id;
         if (!tableId) {

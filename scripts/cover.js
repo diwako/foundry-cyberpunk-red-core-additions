@@ -134,7 +134,7 @@ async function getPosition(height, width) {
   if (window.Portal) {
     let location = await new Portal()
       .texture(
-        "systems/cyberpunk-red-core/icons/compendium/armor/bullet_proof_shield.svg"
+        `systems/${game.system.id}/icons/compendium/armor/bullet_proof_shield.svg`
       )
       .size(Math.max(height, width) * 2)
       .pick();
@@ -148,7 +148,7 @@ async function getPosition(height, width) {
     if (window.warpgate) {
       let location = await warpgate.crosshairs.show({
         size: 1,
-        icon: "systems/cyberpunk-red-core/icons/compendium/armor/bullet_proof_shield.svg",
+        icon: `systems/${game.system.id}/icons/compendium/armor/bullet_proof_shield.svg`,
         label: name,
         drawIcon: true,
         drawOutline: false,
@@ -196,7 +196,7 @@ async function createActor() {
   const actorData = {
     name: name,
     type: "mook",
-    img: "systems/cyberpunk-red-core/icons/compendium/armor/bullet_proof_shield.svg",
+    img: `systems/${game.system.id}/icons/compendium/armor/bullet_proof_shield.svg`,
   };
 
   const actor = await Actor.create(actorData);
