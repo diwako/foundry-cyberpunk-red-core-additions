@@ -6,6 +6,7 @@ import { Cover } from "./cover.js";
 import { PoorWeaponCheck } from "./poorWeaponCheck.js";
 import { DFAmbientLightsAndAA } from "./dfAmbientLights.js";
 import { ItemPiles } from "./itemPiles.js";
+import { Template } from './template.js';
 
 console.log("diwako-cpred-additions start");
 Hooks.once("init", function () {
@@ -225,6 +226,7 @@ Hooks.on("createChatMessage", async function (message) {
 const api = {};
 api.funcs = {};
 api.funcs.createCover = Cover.CreateCover;
+api.funcs.createTemplate = Template.CreateTemplate;
 
 self.cpr_additions = api;
 
