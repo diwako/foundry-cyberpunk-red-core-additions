@@ -26,6 +26,14 @@ export class DFAmbientLightsAndAA {
 }
 
 async function onWorkflowStart(clonedData, animationData) {
+  if(clonedData?.item?.system?.isRanged && !clonedData.ammoItem) {
+    let foundAmmoItem = clonedData.item.system.installedItems?.list?.map(installedId => clonedData.token?.actor?.items?.get(installedId))?.find(installedItem => installedItem.type === 'ammo');
+    if(foundAmmoItem) {
+      clonedData.ammoItem = foundAmmoItem;
+      clonedData.recheckAnimation = true;
+    }
+  }
+
   if (
     !Utils.isResponsibleGM() ||
     !game.settings.get(Constants.MODULE_NAME, "dfAmbientLights-enable")

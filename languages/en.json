@@ -5,6 +5,10 @@
         "name": "Show hit or miss animations",
         "hint": "Requires Sequencer and JB2A animations! Enable or disable hit or miss animations. Disable if you do not have the JB2A patreon module or Sequencer loaded!"
       },
+      "jb2a-patreon": {
+        "name": "Use JB2A Patreon assets",
+        "hint": "Enable if you do have the JB2A patreon module. Disable if you do not."
+      },
       "hit-sounds": {
         "name": "Play sounds on hit",
         "hint": "Requires Sequencer! Play sounds when target is hit by a ranged attack"

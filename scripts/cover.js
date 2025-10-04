@@ -134,7 +134,7 @@ async function getPosition(height, width) {
   if (window.Portal) {
     let location = await new Portal()
       .texture(
-        "systems/cyberpunk-red-core/icons/compendium/armor/bullet_proof_shield.svg"
+        `systems/${game.system.id}/icons/compendium/armor/bullet_proof_shield.svg`
       )
       .size(Math.max(height, width) * 2)
       .pick();
@@ -148,7 +148,7 @@ async function getPosition(height, width) {
     if (window.warpgate) {
       let location = await warpgate.crosshairs.show({
         size: 1,
-        icon: "systems/cyberpunk-red-core/icons/compendium/armor/bullet_proof_shield.svg",
+        icon: `systems/${game.system.id}/icons/compendium/armor/bullet_proof_shield.svg`,
         label: name,
         drawIcon: true,
         drawOutline: false,
@@ -196,34 +196,63 @@ async function createActor() {
   const actorData = {
     name: name,
     type: "mook",
-    img: "systems/cyberpunk-red-core/icons/compendium/armor/bullet_proof_shield.svg",
+    img: `systems/${game.system.id}/icons/compendium/armor/bullet_proof_shield.svg`,
   };
 
   const actor = await Actor.create(actorData);
 
+  /**
+   * These flags belong on the actor
+   */
+  await actor.setFlag('core', 'sheetClass', `${game.system.id}.CPRMookActorSheet`);
+  await actor.setFlag(game.system.id, 'isCover', true);
+
+  /**
+   * These flags live on the Prototype Token
+   */
   const flags = {};
-  flags["cyberpunk-red-core"] = {};
-  flags["cyberpunk-red-core"]["isCover"] = true;
+  // Source: https://foundryvtt.com/packages/healthEstimate/
   flags.healthEstimate = {
     dontMarkDead: true,
     hideHealthEstimate: true,
     hideName: false,
   };
+  // Source: https://foundryvtt.com/packages/splatter
   flags.splatter = {
     bloodColor: "#000000",
   };
 
   await actor.update({
     prototypeToken: {
-      name: name,
       actorLink: false,
-      vision: false,
-      displayBars: 40,
-      displayName: 30,
-      disposition: 0,
+      displayBars: CONST.TOKEN_DISPLAY_MODES.OWNER,
+      displayName: CONST.TOKEN_DISPLAY_MODES.HOVER,
+      disposition: CONST.TOKEN_DISPOSITIONS.NEUTRAL,
       flags: flags,
-      img: "systems/cyberpunk-red-core/icons/compendium/armor/bullet_proof_shield.svg",
+      img: `systems/${game.system.id}/icons/compendium/armor/bullet_proof_shield.svg`,
+      name: name,
+      vision: false,
     },
+    system: {
+      derivedStats: {
+        hp: {
+          max: 0,
+          value: 0,
+        }
+      },
+      stats: {
+          body: { value: 0 },
+          cool: { value: 0 },
+          dex: { value: 0 },
+          emp: { value: 0, max: 0 },
+          int: { value: 0 },
+          luck: { value: 0, max: 0 },
+          move: { value: 0 },
+          ref: { value: 0 },
+          tech: { value: 0 },
+          will: { value: 0 },
+        }
+    }
   });
 
   await game.settings.set(Constants.MODULE_NAME, "coverActorId", actor.id);
@@ -241,6 +270,13 @@ async function createToken(name, height, width, position, hp) {
   width = Math.max(width, 0.5);
 
   const actor = await getActor();
+  await actor.update({
+    ['system.derivedStats.hp']: {
+      max: hp,
+      value: hp,
+    }
+  });
+
   const data = await actor.getTokenDocument({
     x: 0,
     y: 0,
@@ -251,17 +287,15 @@ async function createToken(name, height, width, position, hp) {
 
   const update = {
     _id: token._id,
-    height: height,
-    width: width,
-    hidden: game.settings.get(Constants.MODULE_NAME, "hideCoverTokenOnPlace"),
-    name: name,
-    x: position.x - canvas.grid.size * (width / 2),
-    y: position.y - canvas.grid.size * (height / 2),
-    elevation: position.elevation,
-    ["actorData.system.derivedStats.hp.max"]: hp,
-    ["actorData.system.derivedStats.hp.value"]: hp,
     ["texture.scaleX"]: 1,
     ["texture.scaleY"]: height / width,
+    elevation: position.elevation,
+    height: height,
+    hidden: game.settings.get(Constants.MODULE_NAME, "hideCoverTokenOnPlace"),
+    name: name,
+    width: width,
+    x: position.x - canvas.grid.size * (width / 2),
+    y: position.y - canvas.grid.size * (height / 2),
   };
 
   await canvas.scene.updateEmbeddedDocuments("Token", [update], {

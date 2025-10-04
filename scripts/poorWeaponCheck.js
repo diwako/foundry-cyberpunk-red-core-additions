@@ -5,7 +5,7 @@ export class PoorWeaponCheck {}
 
 Hooks.on("createChatMessage", async function (message) {
   if (
-    game.userId != message._source.user ||
+    game.userId != message._source.author ||
     !game.settings.get(Constants.MODULE_NAME, "poorWeaponCheck")
   )
     return;

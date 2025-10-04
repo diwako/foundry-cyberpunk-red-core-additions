@@ -2,9 +2,7 @@ const DV_CACHE = new Map();
 export class Utils {
   static getDistance(token, target) {
     if (token.document) token = token.document;
-    const a = canvas.grid.measureDistance(token, target, {
-      gridSpaces: true,
-    });
+    const a = canvas.grid.measurePath([token, target]).cost; // this could also be `distance`, but I don't know the difference yet.
     const b = token.elevation - target.document.elevation;
     return Math.round(Math.sqrt(a * a + b * b));
   }
@@ -22,8 +20,8 @@ export class Utils {
         );
         const pack =
           game.packs.get(compendium) || // what is configured in the system
-          game.packs.get("cyberpunk-red-core.dv-tables") || // 0.87.X and up
-          game.packs.get("cyberpunk-red-core.dvTables"); // 0.86.X and below
+          game.packs.get(`${game.system.id}.dv-tables`) || // 0.87.X and up
+          game.packs.get(`${game.system.id}.dvTables`); // 0.86.X and below
 
         const tableId = pack.index.getName(dvTable)?._id;
         if (!tableId) {

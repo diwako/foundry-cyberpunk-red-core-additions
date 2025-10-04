@@ -5,6 +5,10 @@
         "name": "ヒットとミスのアニメーションを表示",
         "hint": "Sequencer モジュールと JB2A animations モジュールが必要です。ヒットとミスのアニメーションを有効にします。Sequencer モジュールと JB2A patreon モジュールが有効になっていない場合は無効にしてください。"
       },
+      "jb2a-patreon": {
+        "name": "Use JB2A Patreon assets",
+        "hint": "Enable if you do have the JB2A patreon module. Disable if you do not."
+      },
       "hit-sounds": {
         "name": "ヒット時のサウンドを再生",
         "hint": "Sequencer モジュールが必要です。遠隔攻撃がヒットした時のサウンドを再生します。"

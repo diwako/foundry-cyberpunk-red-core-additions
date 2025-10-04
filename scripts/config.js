@@ -17,6 +17,19 @@ export class Config {
       default: window.Sequence != null,
     });
 
+    game.settings.register(Constants.MODULE_NAME, "jb2a-patreon", {
+      name: game.i18n.localize(
+        "diwako-cpred-additions.settings.jb2a-patreon.name"
+      ),
+      hint: game.i18n.localize(
+        "diwako-cpred-additions.settings.jb2a-patreon.hint"
+      ),
+      scope: "world",
+      config: true,
+      type: Boolean,
+      default: true,
+    });
+
     game.settings.register(Constants.MODULE_NAME, "hit-sounds", {
       name: game.i18n.localize(
         "diwako-cpred-additions.settings.hit-sounds.name"
