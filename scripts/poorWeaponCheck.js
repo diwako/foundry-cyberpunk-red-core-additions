@@ -40,23 +40,59 @@ Hooks.on("createChatMessage", async function (message) {
     );
     return;
   }
+
   const itemName = item.name.toLowerCase();
   const isPoorWeapon =
+    item.system.quality == "poor" ||
     itemName.includes("(poor)") ||
     itemName.includes(
-      game.i18n.localize(
-        "diwako-cpred-additions.poor-weapon-check.word-indicator"
-      ).toLowerCase()
+      game.i18n
+        .localize("diwako-cpred-additions.poor-weapon-check.word-indicator")
+        .toLowerCase()
     );
   if (!isPoorWeapon) return;
+
+  let critFailEffect = item.system.critFailEffect;
+
+  if (
+    critFailEffect == "coinToss" &&
+    game.settings.get(Constants.MODULE_NAME, "poorWeaponCheckAutoResolve")
+  ) {
+    if (Math.floor(Math.random() * 2) == 0) {
+      // heads
+      critFailEffect = "jammed";
+    } else {
+      // tails
+      critFailEffect = "destroyed";
+    }
+  }
+
+  let stringKey = "";
+  switch (critFailEffect) {
+    case "destroyed":
+      stringKey = "diwako-cpred-additions.poor-weapon-check.break-weapon";
+      break;
+    case "destroyedBeyondRepair":
+      stringKey =
+        "diwako-cpred-additions.poor-weapon-check.break-beyond-weapon";
+      break;
+    case "jammed":
+      stringKey = "diwako-cpred-additions.poor-weapon-check.jam-weapon";
+      break;
+    case "coinToss":
+      stringKey = "diwako-cpred-additions.poor-weapon-check.cointoss";
+      break;
+    default:
+      console.log(
+        `diwako-cpred-additions ===== Unknown critFailEffect: ${item.system.critFailEffect} | Item: ${item.name} | Token: ${token.name}`
+      );
+      return;
+  }
 
   const messageReplaceMap = {
     attacker: token.name,
     weapon: item.name,
   };
-  const stringKey = item.system.isRanged
-    ? "diwako-cpred-additions.poor-weapon-check.ranged-weapon"
-    : "diwako-cpred-additions.poor-weapon-check.melee-weapon";
   ChatMessage.create(
     {
       speaker: message.speaker,

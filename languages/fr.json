@@ -39,9 +39,13 @@
         "name": "Cacher le token de couverture en place",
         "hint": "Cache le jeton de couverture lorsqu'il est créé par la macro. Les MJ pourront le voir, mais pas les joueurs."
       },
-      "poor-weapon-jam-check": {
+      "poor-weapon-check": {
         "name": "Check if poor quality weapons should jam",
-        "hint": "Checks each attack roll if a poor quality weapon should jam or break. Do mind that quality of weapons is noted in their weapon name such as (Poor)! This is important for this to work!"
+        "hint": "Checks each attack roll if a poor quality weapon should jam or break. Do mind that quality of weapons is noted in their weapon name such as (Poor)! This is important for this to work!",
+        "autoResolve": {
+          "name": "Auto resolve coin toss for poor weapon check",
+          "hint": "Automatically resolves the coin toss for poor weapons, which have the critical fail rule to jam or break on a cointoss."
+        }
       },
       "dfAmbientLights-enable": {
         "name": "Create Lights for muzzle flashes",
@@ -92,8 +96,10 @@
     },
     "poor-weapon-check": {
       "word-indicator": "(poor)",
-      "ranged-weapon": "Upon attacking with the ranged weapon \"{weapon}\",it <b><span class=\"fg-red\">jams</span></b>!",
-      "melee-weapon": "Upon attacking with the melee weapon \"{weapon}\", it <b><span class=\"fg-red\">breaks</span></b>, and is <b>not usable anymore</b>!"
+      "jam-weapon": "Upon attacking with the weapon \"{weapon}\",it <b><span class=\"fg-red\">jams</span></b>!",
+      "break-weapon": "Upon attacking with the weapon \"{weapon}\", it <b><span class=\"fg-red\">breaks</span></b>, and is <b>not usable anymore</b>!",
+      "break-beyond-weapon": "Upon attacking with the weapon \"{weapon}\", it <b><span class=\"fg-red\">breaks beyond repair</span></b>, and is <b>not usable anymore</b>!",
+      "cointoss": "Upon attacking with the weapon \"{weapon}\", a malfunction happens. You need to <b>toss a coin</b> to determine if the weapon jams or breaks!<br>Use <b>Heads</b> for <b>Jams</b> and <b>Tails</b> for <b>Breaks</b>!"
     }
   }
 }

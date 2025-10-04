@@ -156,6 +156,19 @@ export class Config {
       default: true,
     });
 
+    game.settings.register(Constants.MODULE_NAME, "poorWeaponCheckAutoResolve", {
+      name: game.i18n.localize(
+        "diwako-cpred-additions.settings.poor-weapon-check.autoResolve.name"
+      ),
+      hint: game.i18n.localize(
+        "diwako-cpred-additions.settings.poor-weapon-check.autoResolve.hint"
+      ),
+      scope: "world",
+      config: true,
+      type: Boolean,
+      default: true,
+    });
+
     console.log("diwako-cpred-additions settings end");
   }
 }
