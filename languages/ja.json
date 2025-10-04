@@ -41,11 +41,7 @@
       },
       "poor-weapon-check": {
         "name": "低品質の武器の動作不良チェック",
-        "hint": "低品質の武器が弾詰まりを起こしたりは壊れたりする可かどうかを攻撃ロールの際にチェックします。 武器名に (低品質) などが追加されている必要があります。",
-        "autoResolve": {
-          "name": "Auto resolve coin toss for poor weapon check",
-          "hint": "Automatically resolves the coin toss for poor weapons, which have the critical fail rule to jam or break on a cointoss."
-        }
+        "hint": "低品質の武器が弾詰まりを起こしたりは壊れたりする可かどうかを攻撃ロールの際にチェックします。 武器名に (低品質) などが追加されている必要があります。"
       },
       "dfAmbientLights-enable": {
         "name": "マズルフラッシュアニメーションを表示",
@@ -99,7 +95,7 @@
       "jam-weapon": "Upon attacking with the weapon \"{weapon}\",it <b><span class=\"fg-red\">jams</span></b>!",
       "break-weapon": "Upon attacking with the weapon \"{weapon}\", it <b><span class=\"fg-red\">breaks</span></b>, and is <b>not usable anymore</b>!",
       "break-beyond-weapon": "Upon attacking with the weapon \"{weapon}\", it <b><span class=\"fg-red\">breaks beyond repair</span></b>, and is <b>not usable anymore</b>!",
-      "cointoss": "Upon attacking with the weapon \"{weapon}\", a malfunction happens. You need to <b>toss a coin</b> to determine if the weapon jams or breaks!<br>Use <b>Heads</b> for <b>Jams</b> and <b>Tails</b> for <b>Breaks</b>!"
+      "cointoss": "Upon attacking with the weapon \"{weapon}\", <b>a malfunction happens</b>. <b><span class=\"fg-red\">A coin must be tossed</span></b> to determine what happens! Check the rules of the weapon for details!"
     }
   }
 }

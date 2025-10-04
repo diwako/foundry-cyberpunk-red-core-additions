@@ -41,11 +41,7 @@
       },
       "poor-weapon-check": {
         "name": "Check if poor quality weapons should jam",
-        "hint": "Checks each attack roll if a poor quality weapon should jam or break. Do mind that quality of weapons is noted in their weapon name such as (Poor)! This is important for this to work!",
-        "autoResolve": {
-          "name": "Auto resolve coin toss for poor weapon check",
-          "hint": "Automatically resolves the coin toss for poor weapons, which have the critical fail rule to jam or break on a cointoss."
-        }
+        "hint": "Checks each attack roll if a poor quality weapon should jam or break. Do mind that quality of weapons is noted in their weapon name such as (Poor)! This is important for this to work!"
       },
       "dfAmbientLights-enable": {
         "name": "Create Lights for muzzle flashes",
@@ -99,7 +95,7 @@
       "jam-weapon": "Beim Angriff mit der Waffe \"{weapon}\" hat diese eine <b><span class=\"fg-red\">Ladehemmung</span></b>!",
       "break-weapon": "Beim Angriff mit der Waffe \"{weapon}\" geht diese <b><span class=\"fg-red\">kaputt</span></b> und ist <b>nicht mehr verwendbar</b>!",
       "break-beyond-weapon": "Beim Angriff mit der Waffe \"{weapon}\" geht diese <b><span class=\"fg-red\">komplett kaputt</span></b> und ist <b>nicht mehr verwendbar</b>! <b><span class=\"fg-red\">Die Waffe ist nicht mehr reparierbar!</span></b>",
-      "cointoss": "Beim Angriff mit der Waffe \"{weapon}\" ist eine Fehlfunktion passiert. Werfe <b>eine Münze</b> um heraus zu finden ob diese eine Ladehemmung hat oder kaputt geht.<br>Bei <b>Kopf</b> ist es eine Ladehemmung, bei <b>Zahl</b> ist die Waffe kaputt</b>!"
+      "cointoss": "Beim Angriff mit der Waffe \"{weapon}\" ist eine <b>Fehlfunktion passiert</b>. <b><span class=\"fg-red\">Es muss eine Münze geworfen werden</span></b>! Schau in den Regelwerk der Waffe nach was passiert!"
     }
   }
 }

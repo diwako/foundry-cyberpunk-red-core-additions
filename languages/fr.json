@@ -41,11 +41,7 @@
       },
       "poor-weapon-check": {
         "name": "Check if poor quality weapons should jam",
-        "hint": "Checks each attack roll if a poor quality weapon should jam or break. Do mind that quality of weapons is noted in their weapon name such as (Poor)! This is important for this to work!",
-        "autoResolve": {
-          "name": "Auto resolve coin toss for poor weapon check",
-          "hint": "Automatically resolves the coin toss for poor weapons, which have the critical fail rule to jam or break on a cointoss."
-        }
+        "hint": "Checks each attack roll if a poor quality weapon should jam or break. Do mind that quality of weapons is noted in their weapon name such as (Poor)! This is important for this to work!"
       },
       "dfAmbientLights-enable": {
         "name": "Create Lights for muzzle flashes",
@@ -99,7 +95,7 @@
       "jam-weapon": "Upon attacking with the weapon \"{weapon}\",it <b><span class=\"fg-red\">jams</span></b>!",
       "break-weapon": "Upon attacking with the weapon \"{weapon}\", it <b><span class=\"fg-red\">breaks</span></b>, and is <b>not usable anymore</b>!",
       "break-beyond-weapon": "Upon attacking with the weapon \"{weapon}\", it <b><span class=\"fg-red\">breaks beyond repair</span></b>, and is <b>not usable anymore</b>!",
-      "cointoss": "Upon attacking with the weapon \"{weapon}\", a malfunction happens. You need to <b>toss a coin</b> to determine if the weapon jams or breaks!<br>Use <b>Heads</b> for <b>Jams</b> and <b>Tails</b> for <b>Breaks</b>!"
+      "cointoss": "Upon attacking with the weapon \"{weapon}\", <b>a malfunction happens</b>. <b><span class=\"fg-red\">A coin must be tossed</span></b> to determine what happens! Check the rules of the weapon for details!"
     }
   }
 }

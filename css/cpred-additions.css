@@ -36,8 +36,15 @@
 }
 .item-piles-disabled {
   background-color: var(
-    /* --cpr-background-tab-inactive, */
-    --cpr-text-icon-dimmed,
+    /* --cpr-background-tab-inactive, */ --cpr-text-icon-dimmed,
     --item-piles-minor-inactive
   ) !important;
+}
+
+.fg-red {
+  color: var(--cpr-color-red, #b90202);
+}
+
+.fg-green {
+  color: var(--cpr-text-chat-success, #609040);
 }

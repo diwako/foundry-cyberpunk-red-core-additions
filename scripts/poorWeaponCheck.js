@@ -52,23 +52,8 @@ Hooks.on("createChatMessage", async function (message) {
     );
   if (!isPoorWeapon) return;
 
-  let critFailEffect = item.system.critFailEffect;
-
-  if (
-    critFailEffect == "coinToss" &&
-    game.settings.get(Constants.MODULE_NAME, "poorWeaponCheckAutoResolve")
-  ) {
-    if (Math.floor(Math.random() * 2) == 0) {
-      // heads
-      critFailEffect = "jammed";
-    } else {
-      // tails
-      critFailEffect = "destroyed";
-    }
-  }
-
   let stringKey = "";
-  switch (critFailEffect) {
+  switch (item.system.critFailEffect) {
     case "destroyed":
       stringKey = "diwako-cpred-additions.poor-weapon-check.break-weapon";
       break;
