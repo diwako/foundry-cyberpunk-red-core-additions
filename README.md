@@ -54,7 +54,7 @@ In Cyberpunk Red, poor weapons can jam or break when the attacker rolls a 1 on t
 
 The feature can be turned off by the GM, it is default enabled.
 
-**Make sure poor quality weapons have the identifier `(Poor)` or language equivalent in its item name!**
+**Make sure poor quality weapons have been configured as such, alternatively add the identifier `(Poor)` or language equivalent in its item name!**
 
 ### Item Piles Module features
 
