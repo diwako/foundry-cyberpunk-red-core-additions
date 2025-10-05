@@ -92,8 +92,10 @@
     },
     "poor-weapon-check": {
       "word-indicator": "(低品質)",
-      "ranged-weapon": "\"{weapon}\"はこの攻撃で<b><span class=\"fg-red\">弾詰まりが起こった！</span></b>",
-      "melee-weapon": "\"{weapon}\"はこの攻撃で<b><span class=\"fg-red\">壊れた！</span></b>もう使用できない。"
+      "jam-weapon": "Upon attacking with the weapon \"{weapon}\", it <b><span class=\"fg-red\">jams</span></b>!",
+      "break-weapon": "Upon attacking with the weapon \"{weapon}\", it <b><span class=\"fg-red\">breaks</span></b>, and is <b>not usable anymore</b>!",
+      "break-beyond-weapon": "Upon attacking with the weapon \"{weapon}\", it <b><span class=\"fg-red\">breaks beyond repair</span></b>, and is <b>not usable anymore</b>!",
+      "cointoss": "Upon attacking with the weapon \"{weapon}\", <b>a malfunction happens</b>. <b><span class=\"fg-red\">A coin must be tossed</span></b> to determine what happens! Check the rules of the weapon for details!"
     }
   }
 }

@@ -92,8 +92,10 @@
     },
     "poor-weapon-check": {
       "word-indicator": "(schlechte qualität)",
-      "ranged-weapon": "Beim Angriff mit der Fernkampfwaffe \"{weapon}\" hat diese eine <b><span class=\"fg-red\">Ladehemmung</span></b>!",
-      "melee-weapon": "Beim Angriff mit der Nahkampfwaffe \"{weapon}\" geht diese <b><span class=\"fg-red\">kaputt</span></b> und ist <b>nicht mehr verwendbar</b>!"
+      "jam-weapon": "Beim Angriff mit der Waffe \"{weapon}\" hat diese eine <b><span class=\"fg-red\">Ladehemmung</span></b>!",
+      "break-weapon": "Beim Angriff mit der Waffe \"{weapon}\" geht diese <b><span class=\"fg-red\">kaputt</span></b> und ist <b>nicht mehr verwendbar</b>!",
+      "break-beyond-weapon": "Beim Angriff mit der Waffe \"{weapon}\" geht diese <b><span class=\"fg-red\">komplett kaputt</span></b> und ist <b>nicht mehr verwendbar</b>! <b><span class=\"fg-red\">Die Waffe ist nicht mehr reparierbar!</span></b>",
+      "cointoss": "Beim Angriff mit der Waffe \"{weapon}\" ist eine <b>Fehlfunktion passiert</b>. <b><span class=\"fg-red\">Es muss eine Münze geworfen werden</span></b>! Schau in dem Regelwerk der Waffe nach was passiert!"
     }
   }
 }
