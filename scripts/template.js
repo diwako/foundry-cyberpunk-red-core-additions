@@ -6,9 +6,7 @@ export class Template {
     let position;
     if (window.Portal) {
       let location = await new Portal()
-        .texture(
-          "icons/svg/explosion.svg",
-        )
+        .texture("icons/svg/explosion.svg")
         .size(inputData.size * 2)
         .pick();
 
@@ -18,16 +16,10 @@ export class Template {
 
       position = location;
     } else {
-      let config = {
-        icon: "icons/svg/explosion.svg",
-        rememberControlled: true,
-        size: inputData.size,
-        label: handler.item?.name || handler.animationData.label,
-        drawIcon: true,
-        drawOutline: true,
-      };
-
-      position = await warpgate.crosshairs.show(config);
+      ui.notifications.error(
+        game.i18n.localize("diwako-cpred-additions.template.portal-missing")
+      );
+      return;
     }
 
     let tempSize = inputData.size * 2;

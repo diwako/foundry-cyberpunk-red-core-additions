@@ -96,6 +96,9 @@
       "break-weapon": "Upon attacking with the weapon \"{weapon}\", it <b><span class=\"fg-red\">breaks</span></b>, and is <b>not usable anymore</b>!",
       "break-beyond-weapon": "Upon attacking with the weapon \"{weapon}\", it <b><span class=\"fg-red\">breaks beyond repair</span></b>, and is <b>not usable anymore</b>!",
       "cointoss": "Upon attacking with the weapon \"{weapon}\", <b>a malfunction happens</b>. <b><span class=\"fg-red\">A coin must be tossed</span></b> to determine what happens! Check the rules of the weapon for details!"
+    },
+    "template": {
+      "portal-missing": "In order to use the template placement feature, the module \"Portal\" by \"theripper93\" is required! Please install and activate it."
     }
   }
 }
