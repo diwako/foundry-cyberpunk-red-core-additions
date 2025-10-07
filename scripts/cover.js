@@ -145,34 +145,8 @@ async function getPosition(height, width) {
 
     position = location;
   } else {
-    if (window.warpgate) {
-      let location = await warpgate.crosshairs.show({
-        size: 1,
-        icon: `systems/${game.system.id}/icons/compendium/armor/bullet_proof_shield.svg`,
-        label: name,
-        drawIcon: true,
-        drawOutline: false,
-        interval: 2,
-      });
-
-      if (location.cancelled) {
-        return;
-      }
-      position = {
-        x: location.x,
-        y: location.y,
-        elevation: location.elevation || 0,
-      };
-    } else {
-      const { x, y } =
-        canvas.app.renderer.plugins.interaction?.mouse?.getLocalPosition(
-          canvas.app.stage
-        ) ||
-        canvas.app?.renderer.plugins.interaction?.pointer?.getLocalPosition(
-          canvas.app.stage
-        );
-      position = { x: x, y: y, elevation: 0 };
-    }
+    const { x, y } = canvas.mousePosition;
+    position = { x: x, y: y, elevation: 0 };
   }
   return position;
 }
@@ -204,8 +178,12 @@ async function createActor() {
   /**
    * These flags belong on the actor
    */
-  await actor.setFlag('core', 'sheetClass', `${game.system.id}.CPRMookActorSheet`);
-  await actor.setFlag(game.system.id, 'isCover', true);
+  await actor.setFlag(
+    "core",
+    "sheetClass",
+    `${game.system.id}.CPRMookActorSheet`
+  );
+  await actor.setFlag(game.system.id, "isCover", true);
 
   /**
    * These flags live on the Prototype Token
@@ -238,21 +216,21 @@ async function createActor() {
         hp: {
           max: 0,
           value: 0,
-        }
+        },
       },
       stats: {
-          body: { value: 0 },
-          cool: { value: 0 },
-          dex: { value: 0 },
-          emp: { value: 0, max: 0 },
-          int: { value: 0 },
-          luck: { value: 0, max: 0 },
-          move: { value: 0 },
-          ref: { value: 0 },
-          tech: { value: 0 },
-          will: { value: 0 },
-        }
-    }
+        body: { value: 0 },
+        cool: { value: 0 },
+        dex: { value: 0 },
+        emp: { value: 0, max: 0 },
+        int: { value: 0 },
+        luck: { value: 0, max: 0 },
+        move: { value: 0 },
+        ref: { value: 0 },
+        tech: { value: 0 },
+        will: { value: 0 },
+      },
+    },
   });
 
   await game.settings.set(Constants.MODULE_NAME, "coverActorId", actor.id);
@@ -271,10 +249,10 @@ async function createToken(name, height, width, position, hp) {
 
   const actor = await getActor();
   await actor.update({
-    ['system.derivedStats.hp']: {
+    ["system.derivedStats.hp"]: {
       max: hp,
       value: hp,
-    }
+    },
   });
 
   const data = await actor.getTokenDocument({
