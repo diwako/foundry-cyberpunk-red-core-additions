@@ -7,6 +7,7 @@ import { PoorWeaponCheck } from "./poorWeaponCheck.js";
 import { DFAmbientLightsAndAA } from "./dfAmbientLights.js";
 import { ItemPiles } from "./itemPiles.js";
 import { Template } from './template.js';
+import { healTokens } from "./macros/heal.js";
 
 console.log("diwako-cpred-additions start");
 Hooks.once("init", function () {
@@ -227,6 +228,7 @@ const api = {};
 api.funcs = {};
 api.funcs.createCover = Cover.CreateCover;
 api.funcs.createTemplate = Template.CreateTemplate;
+api.funcs.heal = healTokens;
 
 self.cpr_additions = api;
 
