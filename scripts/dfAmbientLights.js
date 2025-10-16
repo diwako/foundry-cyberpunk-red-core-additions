@@ -31,6 +31,8 @@ async function onWorkflowStart(clonedData, animationData) {
       ?.map((installedId) => clonedData.token?.actor?.items?.get(installedId))
       ?.find((installedItem) => installedItem.type === "ammo");
     if (foundAmmoItem) {
+      clonedData.ammoItem = foundAmmoItem;
+      clonedData.recheckAnimation = true;
       if (
         ["arrow", "paintball", "grenade"].find(
           (e) => e == foundAmmoItem.system.variety
@@ -39,9 +41,6 @@ async function onWorkflowStart(clonedData, animationData) {
         // no flashes for grenades or other non-bullet ammo
         return;
       }
-
-      clonedData.ammoItem = foundAmmoItem;
-      clonedData.recheckAnimation = true;
     }
   }
 
