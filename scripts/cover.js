@@ -151,22 +151,51 @@ async function getPosition(height, width) {
   return position;
 }
 
+function escapeRegex(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 async function getActor() {
-  let actor = game.actors.get(
-    game.settings.get(Constants.MODULE_NAME, "coverActorId")
+  const defaultName = game.i18n.localize(
+    "diwako-cpred-additions.cover.default-actor-name"
   );
 
-  if (!actor) {
-    actor = await createActor();
+  const escapedName = escapeRegex(defaultName);
+  const nameRegex = new RegExp(`^${escapedName}(?:\\s+(\\d+))?$`);
+
+  const usedNumbers = new Set();
+
+  for (const actor of game.actors) {
+    const match = actor.name.match(nameRegex);
+
+    if (!match) continue;
+
+    // Base name with no number is treated as 1
+    usedNumbers.add(Number(match[1] ?? 1));
   }
+
+  let name = defaultName;
+
+  // Find the first available number
+  let nextNumber = 1;
+  while (usedNumbers.has(nextNumber)) {
+    nextNumber++;
+  }
+
+  if (nextNumber > 1) {
+    name = `${defaultName} ${nextNumber}`;
+  }
+
+  let actor = await createActor(name);
 
   return actor;
 }
 
-async function createActor() {
-  const name = game.i18n.localize(
+async function createActor(name) {
+  name ??= game.i18n.localize(
     "diwako-cpred-additions.cover.default-actor-name"
   );
+
   const actorData = {
     name: name,
     type: "mook",
@@ -233,7 +262,6 @@ async function createActor() {
     },
   });
 
-  await game.settings.set(Constants.MODULE_NAME, "coverActorId", actor.id);
   ui.notifications.notify(
     game.i18n.format("diwako-cpred-additions.cover.created-actor", {
       "actor-name": name,

@@ -136,13 +136,6 @@ export class Config {
       default: true,
     });
 
-    game.settings.register(Constants.MODULE_NAME, "coverActorId", {
-      scope: "world",
-      config: false,
-      default: "",
-      type: String,
-    });
-
     game.settings.register(Constants.MODULE_NAME, "poorWeaponCheck", {
       name: game.i18n.localize(
         "diwako-cpred-additions.settings.poor-weapon-check.name"
