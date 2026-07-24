@@ -10,14 +10,21 @@ import { Template } from './template.js';
 
 console.log("diwako-cpred-additions start");
 Hooks.once("init", function () {
+  // v13 moved Token to the foundry.canvas.placeables namespace and deprecated
+  // the global. Prefer the namespaced class when it exists so the module runs on
+  // v13/v14, and fall back to the global on v12.
+  const TokenClass = foundry.canvas?.placeables?.Token ?? Token;
+  const tokenDrawTarget = foundry.canvas?.placeables?.Token
+    ? "foundry.canvas.placeables.Token.prototype.draw"
+    : "Token.prototype.draw";
   libWrapper.register(
     Constants.MODULE_NAME,
-    "Token.prototype.draw",
+    tokenDrawTarget,
     DvDisplay.registerWrapper,
     "WRAPPER"
   );
-  Token.prototype.showDVDisplay = DvDisplay.show;
-  Token.prototype.clearDVDisplay = DvDisplay.clear;
+  TokenClass.prototype.showDVDisplay = DvDisplay.show;
+  TokenClass.prototype.clearDVDisplay = DvDisplay.clear;
 
   Config.registerSettings();
   DFAmbientLightsAndAA.initialize();
