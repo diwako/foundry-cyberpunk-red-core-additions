@@ -71,8 +71,11 @@ Hooks.on("createChatMessage", async function (message) {
     console.log(`diwako-cpred-additions ===== No target was selected!`);
     return;
   }
+  const speakerToken = message.speaker?.token;
   let token =
-    message.speaker?.token ||
+    (typeof speakerToken === "string"
+      ? canvas.scene.tokens.get(speakerToken)
+      : speakerToken) ||
     canvas.scene.tokens.get(data.tokenId) ||
     canvas.scene.tokens.getName(message.speaker?.alias);
   const actor = token?.actor ?? game.actors.get(data.actorId);
@@ -83,7 +86,7 @@ Hooks.on("createChatMessage", async function (message) {
     );
     token = canvas.scene.tokens.getName(actor.prototypeToken.name);
   }
-  const item = actor.items.get(data.itemId);
+  const item = actor?.items.get(data.itemId);
 
   if (!token || !actor || !item) {
     console.log(
