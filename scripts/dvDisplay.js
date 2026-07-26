@@ -90,7 +90,9 @@ export class DvDisplay {
     const style = CONFIG.canvasTextStyle.clone();
     style.align = position === "right" ? "left" : "right";
 
-    const text = new PreciseText(displayText, style);
+    const PreciseTextClass =
+      foundry.canvas?.containers?.PreciseText ?? PreciseText;
+    const text = new PreciseTextClass(displayText, style);
     text.anchor.set(1, 0);
 
     this.dvDisplay.addChild(text);

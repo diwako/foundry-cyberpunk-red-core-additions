@@ -22,9 +22,12 @@ Hooks.on("createChatMessage", async function (message) {
     return;
   }
 
-  const isFail = DIV.querySelector(".d10")
-    .getAttribute("src")
-    .includes("d10_1_fail.svg");
+  const d10 = DIV.querySelector(".d10");
+  const dieImage = d10?.getAttribute("src");
+  const dieResult = Number.parseInt(d10?.textContent?.trim(), 10);
+  const isFail = dieImage
+    ? dieImage.includes("d10_1_fail.svg")
+    : dieResult === 1;
   if (!isFail) return;
 
   let token =

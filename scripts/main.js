@@ -10,14 +10,21 @@ import { Template } from './template.js';
 
 console.log("diwako-cpred-additions start");
 Hooks.once("init", function () {
+  // v13 moved Token to the foundry.canvas.placeables namespace and deprecated
+  // the global. Prefer the namespaced class when it exists so the module runs on
+  // v13/v14, and fall back to the global on v12.
+  const TokenClass = foundry.canvas?.placeables?.Token ?? Token;
+  const tokenDrawTarget = foundry.canvas?.placeables?.Token
+    ? "foundry.canvas.placeables.Token.prototype.draw"
+    : "Token.prototype.draw";
   libWrapper.register(
     Constants.MODULE_NAME,
-    "Token.prototype.draw",
+    tokenDrawTarget,
     DvDisplay.registerWrapper,
     "WRAPPER"
   );
-  Token.prototype.showDVDisplay = DvDisplay.show;
-  Token.prototype.clearDVDisplay = DvDisplay.clear;
+  TokenClass.prototype.showDVDisplay = DvDisplay.show;
+  TokenClass.prototype.clearDVDisplay = DvDisplay.clear;
 
   Config.registerSettings();
   DFAmbientLightsAndAA.initialize();
@@ -64,8 +71,11 @@ Hooks.on("createChatMessage", async function (message) {
     console.log(`diwako-cpred-additions ===== No target was selected!`);
     return;
   }
+  const speakerToken = message.speaker?.token;
   let token =
-    message.speaker?.token ||
+    (typeof speakerToken === "string"
+      ? canvas.scene.tokens.get(speakerToken)
+      : speakerToken) ||
     canvas.scene.tokens.get(data.tokenId) ||
     canvas.scene.tokens.getName(message.speaker?.alias);
   const actor = token?.actor ?? game.actors.get(data.actorId);
@@ -76,7 +86,7 @@ Hooks.on("createChatMessage", async function (message) {
     );
     token = canvas.scene.tokens.getName(actor.prototypeToken.name);
   }
-  const item = actor.items.get(data.itemId);
+  const item = actor?.items.get(data.itemId);
 
   if (!token || !actor || !item) {
     console.log(
